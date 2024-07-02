@@ -6,6 +6,7 @@
 
 ### 1. Selection Sort
 Repeatedly select the lowest/highest element from the unsorted part of the list & place it after the sorted part of the list.  
+![Selection Sort](images/selectionsort.png)  
 **Time Complexity:** O(n^2) in all cases  
 **Space Complexity:** O(1)  
 ❌ Stable (default) (can me made stable)  
@@ -14,6 +15,7 @@ Repeatedly select the lowest/highest element from the unsorted part of the list 
 
 ### 2. Bubble Sort
 Repeatedly swap the adjacent elements if they're in the wrong order, bringing the highest element to the end in each iteration.  
+![Bubble Sort](images/bubblesort.png)  
 **Time Complexity:** O(n^2) in worst & avg, O(n) in best cases (already sorted)  
 **Space Complexity:** O(1)  
 ✔️ Stable  
@@ -21,7 +23,8 @@ Repeatedly swap the adjacent elements if they're in the wrong order, bringing th
 ✔️ Internal
 
 ### 3. Insertion Sort
-Iteratively insert each element of an unsorted list into its correct position in the sorted portion of the list.  
+Iteratively insert each element of an unsorted list into its correct position in the sorted portion of the list.        
+![Insertion Sort](images/insertionsort.png)  
 **Time Complexity:** O(n^2) in worst & avg, O(n) in best cases (already sorted)  
 **Space Complexity:** O(1)  
 ✔️ Stable  
@@ -29,7 +32,9 @@ Iteratively insert each element of an unsorted list into its correct position in
 ✔️ Internal
 
 ### 4. Merge Sort
-Recursively divide the input into smaller sub-arrays and sort those & merge them back by Divide & Conquer approach.   
+Recursively divide the input into smaller sub-arrays and sort those & merge them back by Divide & Conquer approach.  
+![Merge Sort](images/mergesort.png)  
+This one of the most optimised & most used sorting algos.  
 **Time Complexity:** O(n logn)  
 **Space Complexity:** O(n)  
 ✔️ Stable  
