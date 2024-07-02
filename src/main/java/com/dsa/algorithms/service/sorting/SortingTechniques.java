@@ -7,6 +7,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class SortingTechniques {
 
+    private final MergeSortAlgorithm mergeSortAlgorithm;
+
+    public SortingTechniques(MergeSortAlgorithm mergeSortAlgorithm) {
+        this.mergeSortAlgorithm = mergeSortAlgorithm;
+    }
+
+
     public void selectionSort(int[] arr) {
         log.info("Initial array: {}", arr);
         int n = arr.length;
@@ -23,7 +30,6 @@ public class SortingTechniques {
         }
         log.info("Selection Sorted array: {}", arr);
     }
-
 
     public void bubbleSort(int[] arr) {
         int n = arr.length;
@@ -44,6 +50,28 @@ public class SortingTechniques {
             }
         }
         log.info("Bubble Sorted array: {}", arr);
+    }
+
+    public void insertionSort(int[] arr) {
+        int n = arr.length;
+        log.info("Initial array: {}", arr);
+        for (int i = 1; i < n; i++) {
+            int key = arr[i];
+            int j = i - 1;
+
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = key;
+        }
+        log.info("Insertion Sorted array: {}", arr);
+    }
+
+    public void mergeSort(int[] arr) {
+        log.info("Initial array: {}", arr);
+        mergeSortAlgorithm.mergeSort(arr);
+        log.info("Merge Sorted array: {}", arr);
     }
 
     private void swapElementsAt(int[] arr, int i, int j) {

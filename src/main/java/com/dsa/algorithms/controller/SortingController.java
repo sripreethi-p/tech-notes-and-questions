@@ -30,4 +30,16 @@ public class SortingController {
         int [] array = new int[] { 4, 2, 1, 9, 34, 0, -4 };
         sortingTechniques.bubbleSort(array);
     }
+
+    @GetMapping(value = "/insertion")
+    public void insertionSort()  {
+        int [] array = new int[] { 4, 2, 1, 9, 34, 0, -4 };
+        sortingTechniques.insertionSort(array);
+    }
+
+    @GetMapping(value = "/merge")
+    public void mergeSort()  {
+        int [] array = new int[] { 4, 2, 1, 9, 34, 0, -4 };
+        sortingTechniques.mergeSort(array);
+    }
 }
