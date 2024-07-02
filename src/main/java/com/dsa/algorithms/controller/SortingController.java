@@ -42,4 +42,10 @@ public class SortingController {
         int [] array = new int[] { 4, 2, 1, 9, 34, 0, -4 };
         sortingTechniques.mergeSort(array);
     }
+
+    @GetMapping(value = "/quick")
+    public void quickSort()  {
+        int [] array = new int[] { 4, 2, 1, 9, 34, 0, -4 };
+        sortingTechniques.quickSort(array);
+    }
 }

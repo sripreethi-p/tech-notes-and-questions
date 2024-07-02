@@ -1,8 +1,8 @@
 ## Sorting Techniques
 ### Terminology
-1. **Stability** : When two same data appear in the same order in sorted data without changing their position.
-2. **In-place** : When algorithm uses constant space for producing the output (modifies the given array only)
-3. **Internal** : When all the data is placed in the main memory or internal memory. In internal sorting, the problem cannot take input beyond its size.
+1. **Stability** : Elements of same value retain their original positions.  
+2. **In-place** : Uses constant space for producing the output (modifies the given array only).  
+3. **Internal** : All data is placed in the main memory or internal memory. The problem cannot take input beyond its size.
 
 ### 1. Selection Sort
 Repeatedly select the lowest/highest element from the unsorted part of the list & place it after the sorted part of the list.  
@@ -41,4 +41,11 @@ This one of the most optimised & most used sorting algos.
 ❌ In-place  
 ❌ Internal
 
-### 5. 
+### 5. Quick Sort
+Recursively pick an element as pivot and partition the array around it by placing the pivot in its correct position in the sorted array by Divide & Conquer aproach.    
+![Quick Sort](images/quicksort.png)   
+**Time Complexity:** O(n logn) in best cases, O(n^2) is worst & avg (poor choice of pivot)   
+**Space Complexity:** O(1) excluding stack space  
+✔️ Stable  
+✔️ In-place ?  
+✔️ Internal

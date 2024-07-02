@@ -8,9 +8,11 @@ import org.springframework.stereotype.Component;
 public class SortingTechniques {
 
     private final MergeSortAlgorithm mergeSortAlgorithm;
+    private final QuickSortAlgorithm quickSortAlgorithm;
 
-    public SortingTechniques(MergeSortAlgorithm mergeSortAlgorithm) {
+    public SortingTechniques(MergeSortAlgorithm mergeSortAlgorithm, QuickSortAlgorithm quickSortAlgorithm) {
         this.mergeSortAlgorithm = mergeSortAlgorithm;
+        this.quickSortAlgorithm = quickSortAlgorithm;
     }
 
 
@@ -72,6 +74,12 @@ public class SortingTechniques {
         log.info("Initial array: {}", arr);
         mergeSortAlgorithm.mergeSort(arr);
         log.info("Merge Sorted array: {}", arr);
+    }
+
+    public void quickSort(int[] arr) {
+        log.info("Initial array: {}", arr);
+        quickSortAlgorithm.quickSort(arr);
+        log.info("Quick Sorted array: {}", arr);
     }
 
     private void swapElementsAt(int[] arr, int i, int j) {
