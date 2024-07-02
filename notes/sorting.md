@@ -47,5 +47,7 @@ Recursively pick an element as pivot and partition the array around it by placin
 **Time Complexity:** O(n logn) in best cases, O(n^2) is worst & avg (poor choice of pivot)   
 **Space Complexity:** O(1) excluding stack space  
 ✔️ Stable  
-✔️ In-place ?  
-✔️ Internal
+✔️ In-place  
+✔️ Internal  
+
+### 6. Heap Sort
