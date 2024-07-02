@@ -1,4 +1,4 @@
-## Sorting Techniques - [Java Code](src/main/java/com/dsa/algorithms/service/sorting/SortingTechniques.java)
+## Sorting Techniques
 ### Terminology
 1. **Stability** : When two same data appear in the same order in sorted data without changing their position.
 2. **In-place** : When algorithm uses constant space for producing the output (modifies the given array only)
