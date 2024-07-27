@@ -17,7 +17,13 @@ The property of accessing objects as instances of the parent class rather than t
 
 ![Method overloading VS Method overriding](images/overloading-vs-overriding.png)
 ### Encapsulation
-
+The property of bundling the data (fields, methods) inside the object & exposing only the required components outside the object. Its done by "private" keyword.  
+Benefits:
+- Security & Access Control (data hiding)
+- Flexible implementation of classes
+- Modular design of code
 
 ### Dependency Injection
+### Inversion of Control (IoC)
+
 
