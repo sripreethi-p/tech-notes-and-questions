@@ -30,4 +30,7 @@ Benefits:
 ### Abstract Classes Vs Interface
 ![Abstract Classes Vs Interface](images/abstractclass-vs-interface.png)
 
+### STATIC vs FINAL
+
+
 
