@@ -41,3 +41,19 @@ Breadth First Search from vertex 0 : 0, 1, 2, 3, 4
 
 
 ## Shortest Path Algorithms
+
+### Dijkstra's Algorithm
+- Dijkstra's is a **single-source**, **shortest-path** algorithm. 
+- It is an optimization algorithm, hence uses Greedy approach. 
+- One input at a time.
+- It starts at the source vertex and iteratively selects the unvisited vertex with the smallest tentative distance from the source. 
+- It then visits the neighbors of this vertex and updates their tentative distances if a shorter path is found. 
+- This process continues until the destination vertex is reached, or all reachable vertices have been visited.
+- Initialise the sources vertex's distance as 0, connected vertices' distances by weights & the rest by ∞
+
+![Example](/notes/images/dijkstra-example.png)
+
+
+### Bellman-Ford Algorithm
+
+

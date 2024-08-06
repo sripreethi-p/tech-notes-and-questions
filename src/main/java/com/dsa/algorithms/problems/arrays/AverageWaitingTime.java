@@ -3,7 +3,7 @@ package com.dsa.algorithms.problems.arrays;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Arrays {
+public class AverageWaitingTime {
 
     /* 1701. Average Waiting Time
     * There is a restaurant with a single chef. You are given an array customers, where customers[i] = [arrivali, timei]:
