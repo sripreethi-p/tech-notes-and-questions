@@ -43,7 +43,7 @@ This one of the most optimised & most used sorting algos.
 [**Code**](../src/main/java/com/dsa/algorithms/service/sorting/MergeSortAlgorithm.java#L11)    
 ✔️ Stable  
 ❌ In-place  
-❌ Internal
+✔️ Internal
 
 ### 5. Quick Sort
 Recursively pick an element as pivot and partition the array around it by placing the pivot in its correct position in the sorted array by Divide & Conquer aproach.    
