@@ -50,10 +50,19 @@ Breadth First Search from vertex 0 : 0, 1, 2, 3, 4
 - It then visits the neighbors of this vertex and updates their tentative distances if a shorter path is found. 
 - This process continues until the destination vertex is reached, or all reachable vertices have been visited.
 - Initialise the sources vertex's distance as 0, connected vertices' distances by weights & the rest by ∞
+- **Limitation: It doesn't work for negative weights.** Because the algorithm assumes that once a node is visited and its shortest path is determined, that path will not change. However, if there are negative weights, a shorter path could be found later.
+- **Time Complexity:** O ( n * vertices connected to each) => O(n^2) in case of a complete graph in the worst case
 
 ![Example](/notes/images/dijkstra-example.png)
 
 
 ### Bellman-Ford Algorithm
+- Bellman-Ford is a **single-source**, **shortest-path** algorithm.
+- It uses DP approach : find all the ways & decide the best.
+- It iterates through all the edges and relaxes them for n-1 times (n = no.of vertices)
+- Why are the edges relaxed for n-1 times ? Because the max no.of edges that can be involved in a path between any two vertices is n-1 unless the graph is cyclic.
+- We iterate for n-1 times to pick up the least weight (incase of negative weights)
+- **Limitation: It does not work for vertices involved in a -ve weighted cyclic graph**
+- Time Complexity: O( e * (n-1) ) ; e = n(n-1)/2 in a complete graph so O(n^3) in the worst case.
 
-
+![Example](/notes/images/bellmanford-example.png)

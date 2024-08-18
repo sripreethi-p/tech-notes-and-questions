@@ -1,4 +1,4 @@
-package com.dsa.algorithms.problems.arrays.easy;
+package com.dsa.algorithms.problems.leetcode;
 
 public class NumberOfSeniorCitizens {
 

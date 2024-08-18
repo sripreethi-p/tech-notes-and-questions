@@ -1,4 +1,4 @@
-package com.dsa.algorithms.service.dynamicprogramming.medium;
+package com.dsa.algorithms.problems.leetcode;
 
 public class Set1 {
     public int minHeightShelves(int[][] books, int shelfWidth) {

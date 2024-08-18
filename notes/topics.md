@@ -1,8 +1,8 @@
 # DSA Topics
 
-| [Graphs](graphs.md)                                                                                                      | Linked Lists |
-|--------------------------------------------------------------------------------------------------------------------------|--------------|
-| **Representations**   <br/>adjacency matrix,   adjacency list,  edge list                                                |              |
+| [Graphs](graphs.md)                                                                                                      | Linked Lists | [Backtracking](backtracking.md) |
+|--------------------------------------------------------------------------------------------------------------------------|--------------|---------------------------------|
+| **Representations**   <br/>adjacency matrix,   adjacency list,  edge list                                                |              |                                 |
 | **Traversals**  <br/>DFS, BFS                                                                                            |              |
 | **Shortest Path Algorithms**  <br/>Dijkstra's, Bellman Ford, Floyd-Warshall                                              |              |
 | **Minimum Spanning Tree (MST) Algorithms**  <br/> Kruskal’s, Prim’s                                                      |              |

@@ -1,4 +1,4 @@
-package com.dsa.algorithms.problems.arrays;
+package com.dsa.algorithms.problems.leetcode;
 
 import java.util.*;
 
