@@ -9,7 +9,7 @@ Repeatedly select the lowest/highest element from the unsorted part of the list 
 ![Selection Sort](images/selectionsort.png)  
 **Time Complexity:** O(n^2) in all cases  
 **Space Complexity:** O(1)  
-[**Code1**](../src/main/java/com/dsa/algorithms/service/sorting/SortingTechniques.java#L19)  
+[**Code**](../src/main/java/com/dsa/algorithms/service/sorting/SortingTechniques.java#L19)  
 ❌ Stable (default) (can me made stable)  
 ✔️ In-place  
 ✔️ Internal
@@ -19,6 +19,7 @@ Repeatedly swap the adjacent elements if they're in the wrong order, bringing th
 ![Bubble Sort](images/bubblesort.png)  
 **Time Complexity:** O(n^2) in worst & avg, O(n) in best cases (already sorted)  
 **Space Complexity:** O(1)  
+[**Code**](../src/main/java/com/dsa/algorithms/service/sorting/SortingTechniques.java#L36)  
 ✔️ Stable  
 ✔️ In-place  
 ✔️ Internal
@@ -28,6 +29,7 @@ Iteratively insert each element of an unsorted list into its correct position in
 ![Insertion Sort](images/insertionsort.png)  
 **Time Complexity:** O(n^2) in worst & avg, O(n) in best cases (already sorted)  
 **Space Complexity:** O(1)  
+[**Code**](../src/main/java/com/dsa/algorithms/service/sorting/SortingTechniques.java#L57)  
 ✔️ Stable  
 ✔️ In-place  
 ✔️ Internal
@@ -38,6 +40,7 @@ Recursively divide the input into smaller sub-arrays and sort those & merge them
 This one of the most optimised & most used sorting algos.  
 **Time Complexity:** O(n logn)  
 **Space Complexity:** O(n)  
+[**Code**](../src/main/java/com/dsa/algorithms/service/sorting/MergeSortAlgorithm.java#L11)    
 ✔️ Stable  
 ❌ In-place  
 ❌ Internal
@@ -47,6 +50,7 @@ Recursively pick an element as pivot and partition the array around it by placin
 ![Quick Sort](images/quicksort.png)   
 **Time Complexity:** O(n logn) in best cases, O(n^2) is worst & avg (poor choice of pivot)   
 **Space Complexity:** O(1) excluding stack space  
+[**Code**](../src/main/java/com/dsa/algorithms/service/sorting/QuickSortAlgorithm.java#L8)  
 ❌ Stable  
 ✔️ In-place  
 ✔️ Internal  
