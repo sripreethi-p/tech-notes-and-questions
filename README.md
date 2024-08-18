@@ -4,7 +4,7 @@
 
 
 # Data Structures and Algorithms
-
+### - [Leetcode Problems](src/main/java/com/dsa/algorithms/problems/leetcode)
 | [Sorting & Searching](notes/dsa/sorting.md)    | [Linked Lists](notes/dsa/linkedlists.md) | [Binary Trees](notes/dsa/binarytrees.md) | [Graphs](notes/dsa/graphs.md)                                                                                            | [Optimization Algorithms](notes/dsa/optimization.md)   |                                 |
 |------------------------------------------------|------------------------------------------|------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|---------------------------------|
 | Terminology                                    | Definition                               | Properties                               | **Representations**   <br/>adjacency matrix,   adjacency list,  edge list                                                | [Greedy Approach](notes/dsa/greedyapproach.md)         |                                 |
@@ -23,7 +23,6 @@
 |                                                |                                          |                                          | **Graph Algorithms for Specific Problems** <br/>Finding Bridges and Articulation Points, Finding the Diameter of a Tree  |                                                        |
 |                                                |                                          |                                          | **Problems** <br/>1. jfsndvjdk<br/>2. dcejkdfbvkjnckw<br/>3. efivdnknkw                                                  |                                                        |
 
-### - [Leetcode Problems](src/main/java/com/dsa/algorithms/problems/leetcode)
 
 
 
