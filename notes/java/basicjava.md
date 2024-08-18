@@ -23,7 +23,7 @@ For example, think of a superclass called _Animal_ that has a method called _ani
 - Compile time / Static polymorphism (method overloading): having methods with the same name in a class but with different parameters, different return type(optional)
 - Runtime polymorphism (method overriding): redefining/overriding a method in the subclass that is already present in the superclass.  
 
-![Method overloading VS Method overriding](images/overloading-vs-overriding.png)
+![Method overloading VS Method overriding](../images/overloading-vs-overriding.png)
 ### 3. Encapsulation
 The property of bundling the data (fields, methods) inside the object & exposing only the required components outside the object. Its done by "private" keyword.  
 Benefits:
@@ -35,7 +35,7 @@ Benefits:
 ### 5. Inversion of Control (IoC)
 
 ### Abstract Classes Vs Interface
-![Abstract Classes Vs Interface](images/abstractclass-vs-interface.png)
+![Abstract Classes Vs Interface](../images/abstractclass-vs-interface.png)
 
 ### STATIC vs FINAL
 

@@ -37,7 +37,7 @@ To do this a queue is used. All the adjacent unvisited nodes of the current leve
 Breadth First Search from vertex 0 : 0, 1, 2, 3, 4
 ![BFS](/notes/images/graph-bfs.png)
 
-## 👉 [Implementations (representations, traversals)](../src/main/java/com/dsa/algorithms/domain/graph/Graph.java)
+## 👉 [Implementations (representations, traversals)](../../src/main/java/com/dsa/algorithms/domain/graph/Graph.java)
 
 
 ## Shortest Path Algorithms

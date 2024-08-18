@@ -42,6 +42,6 @@ Given a N*N board with the Knight placed on the first block of an empty board. M
 
 - The Naive Algorithm is to generate all tours one by one and check if the generated tour satisfies the constraints.  
 - Backtracking works in an incremental way to attack problems. Typically, we start from an empty solution vector and one by one add items (Meaning of item varies from problem to problem. In the context of Knight’s tour problem, an item is a Knight’s move). When we add an item, we check if adding the current item violates the problem constraint, if it does then we remove the item and try other alternatives. If none of the alternatives works out then we go to the previous stage and remove the item added in the previous stage. If we reach the initial stage back then we say that no solution exists. If adding an item doesn’t violate constraints then we recursively add items one by one. If the solution vector becomes complete then we print the solution.
-- Code is [here](../src/main/java/com/dsa/algorithms/problems/backtracking/KnightsTourProblem.java)
+- Code is [here](../../src/main/java/com/dsa/algorithms/problems/backtracking/KnightsTourProblem.java)
 
 
