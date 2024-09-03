@@ -8,14 +8,30 @@ import java.util.List;
 public class Traversal {
     public List<Integer> inorderTraversal(BinaryTreeNode root) {
         List<Integer> list = new ArrayList<>();
-        traverse(root, list);
+        inOrderTraverse(root, list);
         return list;
     }
-    private void traverse(BinaryTreeNode root, List<Integer> list) {
+
+    public List<Integer> postorderTraversal(BinaryTreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        inOrderTraverse(root, list);
+        return list;
+    }
+
+    private void postOrderTraverse(BinaryTreeNode root, List<Integer> list) {
         if (root != null) {
-            traverse(root.getLeft(), list);
+            postOrderTraverse(root.getLeft(), list);
+            postOrderTraverse(root.getRight(), list);
             list.add(root.getKey());
-            traverse(root.getRight(), list);
+        }
+    }
+
+
+    private void inOrderTraverse(BinaryTreeNode root, List<Integer> list) {
+        if (root != null) {
+            inOrderTraverse(root.getLeft(), list);
+            list.add(root.getKey());
+            inOrderTraverse(root.getRight(), list);
         }
     }
 }

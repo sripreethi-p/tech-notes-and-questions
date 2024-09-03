@@ -6,9 +6,15 @@
 - Encapsulation
 - Dependency Injection
 - Inversion of Control (IoC)
+- Garbage Collectors
+- SOLID principles
+
+## Comparisons
 - Abstract class Vs Interface
 - STATIC vs FINAL
-- Garbage Collectors
+- JDK vs JRE vs JVM
+- String vs StringBuilder vs StringBuffer
+- CallByValue vs CallByReference
 
 ### 1. Inheritance
 The property that allows a subclass to inherit the properties (fields, methods, constructors) of its super class.
@@ -34,12 +40,12 @@ Benefits:
 ### 4. Dependency Injection
 ### 5. Inversion of Control (IoC)
 
-### Abstract Classes Vs Interface
+### 6. Abstract Classes Vs Interface
 ![Abstract Classes Vs Interface](../images/abstractclass-vs-interface.png)
 
-### STATIC vs FINAL
+### 7. STATIC vs FINAL
 
-### HashMap Vs ConcurrentHashMap
+### 8. HashMap Vs ConcurrentHashMap
 | Hashmap                                                                                          | ConcurrentHashMap                                                                                         |
 |--------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
 | Allows one null key, multiple null values                                                        | Doesn't allow null key or null values                                                                     |
@@ -48,7 +54,7 @@ Benefits:
 | fail-fast iterators (throws exception if data is tried to modified after declaring the iterator) | fail-safe iterators (concurrent modification is allowed after the iterator is declared)                   | 
 
 
-### Garbage Collectors
+### 9. Garbage Collectors
 Garbage collectors (GC) manage memory by automatically deleting unused java objects.  
 
 **1. Serial GC** - single thread does the garbage collection, useful in applications with small data sets where simplicity is more important than performance `JVM Option: -XX:+UseSerialGC`    
@@ -66,4 +72,52 @@ Garbage collectors (GC) manage memory by automatically deleting unused java obje
 **7. Epsilon GC (No-op GC)** - The Epsilon GC is a no-op garbage collector that does not reclaim memory. It is designed for testing and benchmarking purposes where you want to see the impact of GC on performance without any actual garbage collection. Suitable for performance testing where garbage collection is not required or for very short-lived applications where memory is not a constraint `JVM Option: -XX:+UseEpsilonGC` 
 
 
+### 10. JDK vs JRE vs JVM
+JDK = Java Development Kit  
+JRE = Java Runtime Environment  
+JVM = Java Virtual Machine  
+- When you install/download a JDK, JRE & JVM comes with it. 
+- JDK compiles java code to bytecode for JVM to execute it. 
+- JVM takes the help of JRE (which has all the default java classes and libraries) to run the compiled bytecode.
 
+### 11. SOLID principles
+- Single Responsibility Principle
+- Open/Closed Principle
+- Liskov Substitution Principle
+- Interface Segregation Principle
+- Dependency Inversion Principle
+
+**1. Single Responsibility Principle (SRP)**
+A class should have only one reason to change, meaning it should have only one job or responsibility.
+![Single Responsibility Principle](../images/single-responsiblity-principle.png)
+
+**2. Open/Closed Principle (OCP)**
+Software entities (classes, modules, functions) should be open for extension but closed for modification. This means that the behavior of a class can be extended without modifying its source code.
+![Open Closed Principle](../images/open-closed-principle.png)
+
+**3. Liskov Substitution Principle (LSP)**
+Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program.
+![Liskov Substitution Principle](../images/liskov-substitution-principle.png)
+
+**4. Interface Segregation Principle (ISP)**
+Interfaces should be small & specific to the purpose rather than big and generic in purpose.
+![Interface Segregation Principle](../images/interface-seggregation-principle.png)
+
+**5. Dependency Inversion Principle (DIP)**
+High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details (i.e., concrete implementations) should depend on abstractions.
+![Dependency Inversion Principle](../images/dependency-inversion-principle.png)
+
+### 12. String vs StringBuilder vs StringBuffer
+- String: Immutable, thread-safe, slower for frequent modifications.
+- StringBuilder: Mutable, not thread-safe, faster for frequent modifications in single-threaded contexts.
+- StringBuffer: Mutable, thread-safe, slower than StringBuilder, but safe for use in multi-threaded contexts.
+
+### 13. CallByValue vs CallByReference
+**1. Call by Value (Primitive Data Types):**
+   When a method is called with a primitive data type (e.g., int, char, double), Java passes a copy of the value.
+   Any changes made to the parameters inside the method will not affect the original variables.  
+
+**2. Call by Value (Object References):**
+   When passing objects to methods, Java passes the reference by value.
+   This means that while the reference to the object is copied, both the original and copied references point to the same object in memory.
+   Therefore, if you modify the object via the reference inside the method, the changes will reflect in the original object. However, reassigning the reference inside the method does not affect the original reference.

@@ -26,13 +26,13 @@ public class FindTheTownJudge997 {
         Output: -1
      */
 
-    public int findJudge(int n, int[][] trust) {
-
-        HashMap<Integer, Pair<Integer, Boolean>> adj = new HashMap<>();
-        for (int[] person : trust) {
-            adj.put(person[1], adj.getOrDefault(person[1], 0) + 1);
-        }
-
-        return adj.entrySet().stream().filter(set -> set.getValue() == n-1).filter(set -> set.get).findFirst().map(Map.Entry::getKey).orElse(-1);
-    }
+//    public int findJudge(int n, int[][] trust) {
+//
+//        HashMap<Integer, Pair<Integer, Boolean>> adj = new HashMap<>();
+//        for (int[] person : trust) {
+//            adj.put(person[1], adj.getOrDefault(person[1], 0) + 1);
+//        }
+//
+//        return adj.entrySet().stream().filter(set -> set.getValue() == n-1).filter(set -> set.get).findFirst().map(Map.Entry::getKey).orElse(-1);
+//    }
 }
