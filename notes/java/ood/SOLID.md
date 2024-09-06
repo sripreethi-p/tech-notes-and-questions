@@ -51,6 +51,6 @@ Interfaces should be small & specific to the purpose rather than big and generic
 High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details (i.e., concrete implementations) should depend on abstractions.  
 
 <p align="center">
-  <img src="../../images/dip-violation-notification.png" alt="Image 1" width="700"/>
-  <img src="../../images/dip-correction-notification.png" alt="Image 2" width="600"/>
+  <img src="../../images/dip-violation-notification.png" alt="Image 1" width="600"/>
+  <img src="../../images/dip-correction-notification.png" alt="Image 2" width="500"/>
 </p>
