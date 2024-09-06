@@ -7,7 +7,7 @@
 - Dependency Injection
 - Inversion of Control (IoC)
 - Garbage Collectors
-- SOLID principles
+
 
 ## Comparisons
 - Abstract class Vs Interface
@@ -80,39 +80,14 @@ JVM = Java Virtual Machine
 - JDK compiles java code to bytecode for JVM to execute it. 
 - JVM takes the help of JRE (which has all the default java classes and libraries) to run the compiled bytecode.
 
-### 11. SOLID principles
-- Single Responsibility Principle
-- Open/Closed Principle
-- Liskov Substitution Principle
-- Interface Segregation Principle
-- Dependency Inversion Principle
 
-**1. Single Responsibility Principle (SRP)**
-A class should have only one reason to change, meaning it should have only one job or responsibility.
-![Single Responsibility Principle](../images/single-responsiblity-principle.png)
 
-**2. Open/Closed Principle (OCP)**
-Software entities (classes, modules, functions) should be open for extension but closed for modification. This means that the behavior of a class can be extended without modifying its source code.
-![Open Closed Principle](../images/open-closed-principle.png)
-
-**3. Liskov Substitution Principle (LSP)**
-Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program.
-![Liskov Substitution Principle](../images/liskov-substitution-principle.png)
-
-**4. Interface Segregation Principle (ISP)**
-Interfaces should be small & specific to the purpose rather than big and generic in purpose.
-![Interface Segregation Principle](../images/interface-seggregation-principle.png)
-
-**5. Dependency Inversion Principle (DIP)**
-High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details (i.e., concrete implementations) should depend on abstractions.
-![Dependency Inversion Principle](../images/dependency-inversion-principle.png)
-
-### 12. String vs StringBuilder vs StringBuffer
+### 11. String vs StringBuilder vs StringBuffer
 - String: Immutable, thread-safe, slower for frequent modifications.
 - StringBuilder: Mutable, not thread-safe, faster for frequent modifications in single-threaded contexts.
 - StringBuffer: Mutable, thread-safe, slower than StringBuilder, but safe for use in multi-threaded contexts.
 
-### 13. CallByValue vs CallByReference
+### 12. CallByValue vs CallByReference
 **1. Call by Value (Primitive Data Types):**
    When a method is called with a primitive data type (e.g., int, char, double), Java passes a copy of the value.
    Any changes made to the parameters inside the method will not affect the original variables.  

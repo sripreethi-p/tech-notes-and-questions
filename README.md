@@ -2,6 +2,10 @@
 - ### [Basic Java](notes/java/basicjava.md)
 - ### [Interview Questions](notes/java/questions.md)
 
+# Object-Oriented Design Principles 
+- ### [SOLID principles](notes/java/ood/SOLID.md)
+- ### [Design Patterns](notes/java/ood/designpatterns.md)
+
 
 # Data Structures and Algorithms
 ### - [Leetcode Problems](src/main/java/com/dsa/algorithms/problems/leetcode)
