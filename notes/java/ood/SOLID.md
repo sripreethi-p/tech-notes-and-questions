@@ -29,8 +29,8 @@ Software entities (classes, modules, functions) should be open for extension but
 Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program.  
 
 <p align="center">
-  <img src="../../images/lsp-violation-bird.png" alt="Image 1" width="700"/>
-  <img src="../../images/lsp-correction-bird.png" alt="Image 2" width="600"/>
+  <img src="../../images/lsp-violation-bird.png" alt="Image 1" width="600"/>
+  <img src="../../images/lsp-correction-bird.png" alt="Image 2" width="500"/>
 </p>
 
 
