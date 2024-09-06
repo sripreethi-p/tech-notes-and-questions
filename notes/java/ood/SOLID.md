@@ -50,4 +50,7 @@ Interfaces should be small & specific to the purpose rather than big and generic
 ### 5. Dependency Inversion Principle (DIP)
 High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details (i.e., concrete implementations) should depend on abstractions.  
 
-![Dependency Inversion Principle](../../images/dependency-inversion-principle.png)
+<p align="center">
+  <img src="../../images/dip-violation-notification.png" alt="Image 1" width="500"/>
+  <img src="../../images/dip-correction-notification.png" alt="Image 2" width="400"/>
+</p>
