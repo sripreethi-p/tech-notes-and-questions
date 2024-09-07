@@ -6,6 +6,9 @@
 - ### [SOLID principles](notes/java/ood/SOLID.md)
 - ### [Design Patterns](notes/java/ood/designpatterns.md)
 
+# Database Design
+- ### [ACID properties](notes/java/database/acid-properties.md)
+- ### [SQL vs NoSQL](notes/java/database/sql-vs-nosql.md)
 
 # Data Structures and Algorithms
 ### - [Leetcode Problems](src/main/java/com/dsa/algorithms/problems/leetcode)
