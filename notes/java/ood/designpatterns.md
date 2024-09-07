@@ -1,31 +1,47 @@
 # Design Patterns
 
-## Creational Patterns
+## [Creational Patterns](#creational-design-patterns)
 Creational design patterns are concerned with the process of object creation.
 They provide various ways to create objects while hiding the complexities of the instantiation process.
-1. Singleton 
-2. Factory Method
+1. **Singleton** 
+2. **Factory Method**
 3. Abstract Factory
 4. Builder
 5. Prototype
 
-## Structural Patterns
+## [Structural Patterns](#structural-design-patterns)
 Structural design patterns are concerned
 with how we establish relationships between the entities for an efficient working of the system.
 1. Adapter (Wrapper)
 2. Bridge
 3. Composite
-4. Decorator
+4. **Decorator**
 5. Facade
 6. Flyweight
 7. Proxy
+
+## [Behavioral Patterns](#behavioral-design-patterns)
+These patterns manage algorithms, relationships, and responsibilities between objects,
+ensuring that objects communicate effectively and efficiently to perform tasks.
+
+1. Chain of Responsibility: Passes a request along a chain of handlers.
+2. Command: Encapsulates a request as an object.
+3. Interpreter: Interprets sentences in a language.
+4. Iterator: Provides a way to traverse a collection without exposing its underlying representation.
+5. Mediator: Defines communication between objects to reduce direct interactions.
+6. Memento: Saves and restores an object’s state.
+7. **Observer**: Notifies dependent objects of state changes.
+8. State: Changes an object’s behavior when its state changes.
+9. **Strategy**: Allows the selection of an algorithm at runtime.
+10. Template Method: Defines the structure of an algorithm but lets subclasses modify certain steps.
+11. Visitor: Adds new operations to a class without changing it.
 
 
 
 
 <br></br>
 
-## Creational Patterns
+## Creational Design Patterns
 
 ### 1. Singleton Design Pattern
 * **Purpose:** Ensures a class has only one instance and provides a global point of access to it.
@@ -84,8 +100,9 @@ with how we establish relationships between the entities for an efficient workin
 
 **Implementation:** Involves a prototype interface with a method for cloning itself and concrete classes that implement this method.  
 
+<br></br>
 
-## Structural Patterns
+## Structural Design Patterns
 
 ### 4. Decorator Pattern
 **Purpose:** Dynamically adds responsibilities to objects by wrapping them in additional functionality without altering the object itself. It provides an alternative to subclassing for extending behavior.  
@@ -96,3 +113,27 @@ with how we establish relationships between the entities for an efficient workin
 This decorating layer will have **both 'has-a' & 'is-a' relationships** with the base class.
 
 ![Decorator Design Pattern](../../images/decorator-design-pattern.png)
+
+<br></br>
+
+## Behavioral Design Patterns
+
+### 7. Observer Pattern
+
+**Description:** an object (known as the subject) maintains a list of its dependents (known as observers) and notifies them of any state changes, usually by calling one of their methods.
+
+**Purpose:** This pattern is commonly used in scenarios where you want to establish a one-to-many relationship between objects, ensuring that when one object changes, all its dependents are automatically informed.
+
+**Example Use case:** A stock ticker system where investors (observers) receive updates on stock prices as soon as there is any change in the stock market. The stock data (subject) is continuously monitored, and all subscribed investors are notified of the updates.
+<br></br>
+
+### 9. Strategy Pattern
+
+**Description:** a behavioral design pattern that allows defining a family of algorithms, encapsulating each one, and making them interchangeable. The pattern lets the algorithm vary independently from the clients that use it.  
+
+**Purpose:** Widely used when you have multiple algorithms for a specific task, and you want to make your system flexible by switching between these algorithms at runtime.
+
+**Implementation:** In Java, the Strategy pattern is implemented by defining a strategy interface, implementing different strategy algorithms as concrete classes, and allowing clients to choose the appropriate strategy dynamically.
+
+**Example Use case:** An e-commerce platform that allows customers to pay using different methods (e.g., Credit Card, PayPal, Cryptocurrency).
+A `PaymentContext` class can switch between different payment strategies like `CreditCardPayment`, `PayPalPayment`, or `CryptoPayment` based on the user's selection during checkout.
