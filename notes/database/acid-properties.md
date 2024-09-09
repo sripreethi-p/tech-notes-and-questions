@@ -1,7 +1,7 @@
 # ACID properties
 The properties of a database to ensure reliable transactions, consistency & data integrity.
 
-![ACID properties](../../images/aci-properties.png)
+![ACID properties](../images/aci-properties.png)
 
 ## 1. Atomicity
 When a transaction involving a group of operations is being run on a database and if one of them fails, all the others are reverted as if the transaction never happened - ALL or NOTHING.
@@ -21,13 +21,13 @@ Transactions being serializable would slow things down. To speed things up, data
 But this could bring some inconsistencies like -- dirty reads, non-repeatable reads, phantom reads.
 
 <p align="center">
-<img src="../../images/violations.png" alt="Image 1" width="800"/> 
+<img src="../images/violations.png" alt="Image 1" width="800"/> 
 </p>
 
 <p align="center">
-  <img src="../../images/dirty-read.png" alt="Image 1" width="300"/>
-  <img src="../../images/non-repatable-read.png" alt="Image 2" width="300"/>
-  <img src="../../images/phantom-read.png" alt="Image 2" width="300"/>
+  <img src="../images/dirty-read.png" alt="Image 1" width="300"/>
+  <img src="../images/non-repatable-read.png" alt="Image 2" width="300"/>
+  <img src="../images/phantom-read.png" alt="Image 2" width="300"/>
 </p>
 
 

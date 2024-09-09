@@ -48,7 +48,7 @@ ensuring that objects communicate effectively and efficiently to perform tasks.
 * **Use Case:** When exactly one instance of a class is needed, such as in logging, configuration management, or connection pooling.
 * **Implementation:** Typically involves creating a static instance of the class and providing a static method to access it.
 
-![Singleton Design Pattern](../../images/singleton-pattern.png)
+![Singleton Design Pattern](../images/singleton-pattern.png)
 
 <br></br>
 
@@ -59,7 +59,7 @@ ensuring that objects communicate effectively and efficiently to perform tasks.
 
 **Implementation:** Involves a base class with a factory method that is overridden by subclasses to create specific objects.
 
-![Factory Design Pattern](../../images/factory-design-pattern.png)
+![Factory Design Pattern](../images/factory-design-pattern.png)
 
 <br></br>
 
@@ -70,7 +70,7 @@ ensuring that objects communicate effectively and efficiently to perform tasks.
 
 **Implementation:** Involves a set of factory methods, each responsible for creating different types of related objects.
 
-![Abstract Factory Design Pattern](../../images/abstract-factory-design-pattern.png)
+![Abstract Factory Design Pattern](../images/abstract-factory-design-pattern.png)
 
 <br></br>
 
@@ -83,7 +83,7 @@ ensuring that objects communicate effectively and efficiently to perform tasks.
 
 **Implementation:** Involves a builder class that assembles the parts of an object and a director class that directs the building process.  
 
-![Builder Design Pattern](../../images/builder-design-pattern.png)  
+![Builder Design Pattern](../images/builder-design-pattern.png)  
 
 **Explanation:**
 - House: The House class is the complex object that we want to build. It has private fields and a private constructor that only the HouseBuilder can use.
@@ -112,7 +112,7 @@ ensuring that objects communicate effectively and efficiently to perform tasks.
 **Example**: Say you want to take an order for a pizza, with many possible combinations of toppings. Creating subclass to superclass Pizza for each combination would create Class Explosion. So we create a Decorative Layer on top that could accommodate multiple combinations but return the same class ultimately.
 This decorating layer will have **both 'has-a' & 'is-a' relationships** with the base class.
 
-![Decorator Design Pattern](../../images/decorator-design-pattern.png)
+![Decorator Design Pattern](../images/decorator-design-pattern.png)
 
 <br></br>
 

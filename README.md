@@ -2,13 +2,23 @@
 - ### [Basic Java](notes/java/basicjava.md)
 - ### [Interview Questions](notes/java/questions.md)
 
-# Object-Oriented Design Principles 
-- ### [SOLID principles](notes/java/ood/SOLID.md)
-- ### [Design Patterns](notes/java/ood/designpatterns.md)
+# Concurrency & Multithreading
+- ### Terms & Usages
+- ### [Designing thread safe classes](notes/multithreading/designing-thread-safe-classes.md)
+- 
+# Object-Oriented Design 
+- ### [SOLID principles](notes/ood/SOLID.md)
+- ### [Design Patterns](notes/ood/designpatterns.md)
+
+# Designing RESTful APIs
+- ### [Principles of RESTful APIs](notes/restapis/designing-rest-apis.md)
+- ### [Fault Tolerance](notes/restapis/fault-tolerance.md)
+- ### [Caching Strategies](notes/restapis/caching-strategies.md)
+
 
 # Database Design
-- ### [ACID properties](notes/java/database/acid-properties.md)
-- ### [SQL vs NoSQL](notes/java/database/sql-vs-nosql.md)
+- ### [ACID properties](notes/database/acid-properties.md)
+- ### [SQL vs NoSQL](notes/database/sql-vs-nosql.md)
 
 # Data Structures and Algorithms
 ### - [Leetcode Problems](src/main/java/com/dsa/algorithms/problems/leetcode)
