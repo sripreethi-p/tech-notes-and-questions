@@ -1,6 +1,7 @@
 # Basic Java
 - ### [Basic Java](notes/java/basicjava.md)
 - ### [Interview Questions](notes/java/questions.md)
+- ### [Tricky Java Programs](notes/java/trickyprograms.md)
 
 # Concurrency & Multithreading
 - ### Terms & Usages
