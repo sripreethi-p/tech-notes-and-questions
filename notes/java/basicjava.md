@@ -62,7 +62,7 @@ Garbage collectors (GC) manage memory by automatically deleting unused java obje
 
 **7. Epsilon GC (No-op GC)** - The Epsilon GC is a no-op garbage collector that does not reclaim memory. It is designed for testing and benchmarking purposes where you want to see the impact of GC on performance without any actual garbage collection. Suitable for performance testing where garbage collection is not required or for very short-lived applications where memory is not a constraint `JVM Option: -XX:+UseEpsilonGC`
 
-
+<br></br>
 
 
 ## Comparisons
@@ -130,6 +130,7 @@ OuterClass.StaticNestedClass nestedObj = new OuterClass.StaticNestedClass();
 - A `static` method belongs to the class rather than instances (objects) of the class. You can call a static method directly using the class name without creating an object of the class.
 - Static methods cannot access instance variables or methods directly; they can only access other static members (methods or fields) of the class. This is because static methods do not have access to the instance (`this` reference) of the class.
 - This is the first block of code that's executed when a class is loaded.
+- We cannot override static methods.
 ```java
 class ExampleClass {
     static void staticMethod() {
@@ -156,3 +157,60 @@ ExampleClass obj1 = new ExampleClass();
 ExampleClass obj2 = new ExampleClass();
 System.out.println(ExampleClass.staticCounter); // Output will be 2
 ```
+
+
+### 8. Final Classes vs Final Methods vs Final Fields
+The `final` keyword in Java can be applied to classes, methods, and fields, with specific behaviors associated with each:
+
+#### Final Classes
+- When a class is declared as `final`, it **cannot be subclassed** (i.e., no other class can extend it).
+- This is often used for security or design reasons to prevent modification through inheritance.
+```java
+public final class Math {
+    // Class implementation
+    /* 
+    Since Math is a final class, 
+    you cannot create a subclass like 
+        class MyMath extends Math.
+     */
+}
+```
+
+#### Final Methods
+- A method declared as `final` cannot be overridden by any subclasses.
+- This is useful when you want to ensure that a method's behavior remains consistent across all subclasses and cannot be modified.
+```java
+public class ParentClass {
+    public final void display() {
+        System.out.println("This is a final method.");
+    }
+}
+
+public class ChildClass extends ParentClass {
+    // The following would cause a compile-time error:
+    // public void display() {
+    //     System.out.println("Attempting to override final method.");
+    // }
+}
+```
+
+#### Final Fields
+- A field declared as `final` cannot be modified once it has been initialized. In other words, it makes the field a constant.
+- For primitive types, the value is set once and cannot change.
+- For reference types (objects), the reference to the object cannot be changed, but the object itself can still be modified (unless it is immutable).
+```java
+public class Example {
+    public static final int MAX_VALUE = 100;  // Constant
+    public final String name;
+
+    public Example(String name) {
+        this.name = name;  // Initialized in the constructor
+    }
+}
+/*
+    In the example above, MAX_VALUE is a constant and cannot be changed
+    While name is a final instance variable that must be initialized either when declared or in the constructor, 
+        and once assigned, it cannot be reassigned.
+ */
+```
+

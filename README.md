@@ -20,6 +20,8 @@
 # Database Design
 - ### [ACID properties](notes/database/acid-properties.md)
 - ### [SQL vs NoSQL](notes/database/sql-vs-nosql.md)
+- ### [Master-Slave Architecture](notes/database/master-slave.md)
+- ### [When to use which DB](notes/database/when-to-use-which.md)
 
 # Data Structures and Algorithms
 ### - [Leetcode Problems](src/main/java/com/dsa/algorithms/problems/leetcode)

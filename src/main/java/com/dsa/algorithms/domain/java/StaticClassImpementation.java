@@ -9,10 +9,18 @@ public class StaticClassImpementation {
         int add2 = System.identityHashCode(obj2);
 
         obj1.print();
-        obj2.print();
+
 
         System.out.println(add1);
         System.out.println(add2);
+
+        SomeClass.StaticClass.num++;
+        SomeClass.StaticClass.num++;
+        SomeClass.StaticClass.num++;
+        SomeClass.StaticClass.num++;
+
+        obj2.print();
+
 
     }
 }

@@ -23,6 +23,10 @@ public class SomeClass {
            num++;
            System.out.println("Hello World" + num);
        }
+
+       public static void printL() {
+           System.out.println("Printing LLLLLLLLL");
+       }
    }
 
 
