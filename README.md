@@ -4,7 +4,7 @@
 - ### [Tricky Java Programs](notes/java/trickyprograms.md)
 
 # Concurrency & Multithreading
-- ### Terms & Usages
+- ### [Terms & Usages](notes/multithreading/terms-and-usages.md)
 - ### [Designing thread safe classes](notes/multithreading/designing-thread-safe-classes.md)
 - 
 # Object-Oriented Design 
