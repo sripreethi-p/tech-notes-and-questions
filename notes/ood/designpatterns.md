@@ -3,11 +3,11 @@
 ## [Creational Patterns](#creational-design-patterns)
 Creational design patterns are concerned with the process of object creation.
 They provide various ways to create objects while hiding the complexities of the instantiation process.
-1. **Singleton** 
-2. **Factory Method**
-3. Abstract Factory
-4. Builder
-5. Prototype
+1. [**Singleton**](#1-singleton-design-pattern) 
+2. [**Factory Method**](#2-factory-pattern)
+3. [Abstract Factory](#3-abstract-factory-pattern)
+4. [Builder](#4-builder-pattern)
+5. [Prototype](#5-prototype-design-pattern)
 
 ## [Structural Patterns](#structural-design-patterns)
 Structural design patterns are concerned
@@ -15,7 +15,7 @@ with how we establish relationships between the entities for an efficient workin
 1. Adapter (Wrapper)
 2. Bridge
 3. Composite
-4. **Decorator**
+4. [**Decorator**](#4-decorator-pattern)
 5. Facade
 6. Flyweight
 7. Proxy
@@ -24,13 +24,13 @@ with how we establish relationships between the entities for an efficient workin
 These patterns manage algorithms, relationships, and responsibilities between objects,
 ensuring that objects communicate effectively and efficiently to perform tasks.
 
-1. Chain of Responsibility: Passes a request along a chain of handlers.
+1. [**Chain of Responsibility**] Passes a request along a chain of handlers.
 2. Command: Encapsulates a request as an object.
 3. Interpreter: Interprets sentences in a language.
 4. Iterator: Provides a way to traverse a collection without exposing its underlying representation.
 5. Mediator: Defines communication between objects to reduce direct interactions.
 6. Memento: Saves and restores an object’s state.
-7. **Observer**: Notifies dependent objects of state changes.
+7. [**Observer**](#7-observer-pattern) Notifies dependent objects of state changes.
 8. State: Changes an object’s behavior when its state changes.
 9. **Strategy**: Allows the selection of an algorithm at runtime.
 10. Template Method: Defines the structure of an algorithm but lets subclasses modify certain steps.

@@ -22,6 +22,7 @@
 - ### [SQL vs NoSQL](notes/database/sql-vs-nosql.md)
 - ### [Master-Slave Architecture](notes/database/master-slave.md)
 - ### [When to use which DB](notes/database/when-to-use-which.md)
+- ### [SQL Joins](notes/database/sql-joins.md)
 
 # Data Structures and Algorithms
 ### - [Leetcode Problems](src/main/java/com/dsa/algorithms/problems/leetcode)

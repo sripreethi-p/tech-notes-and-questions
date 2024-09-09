@@ -1,6 +1,4 @@
-package com.dsa.algorithms.domain.java;
-
-import lombok.Getter;
+package com.dsa.algorithms.domain.java.designpatterns;
 
 public class SingletonClass {
 

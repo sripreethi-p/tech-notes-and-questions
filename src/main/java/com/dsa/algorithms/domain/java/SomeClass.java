@@ -4,6 +4,7 @@ public class SomeClass {
 
    public static class StaticClass {
 
+       private static String str = "Hello World";
        private static StaticClass instance;
        private StaticClass() {
 
@@ -20,6 +21,7 @@ public class SomeClass {
        public static int num = 0;
 
        public static void print() {
+           System.out.println(str);
            num++;
            System.out.println("Hello World" + num);
        }
