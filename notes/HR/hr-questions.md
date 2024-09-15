@@ -172,6 +172,7 @@
 **Example:**
 - When I use certain libraries/frameworks/tools/languages daily, I make sure I'm consciously using the recent versions—understanding what changes are the newer version bringing in & the impact it would bring. _[everyday work]_
 - I get involved in tech discussions happening around between principal engineers, internal tech support channels _[internal resources]_
+- I participate in hackathons and tech tournaments, especially the gamified ones.
 - I try to stay updated with going through all the tech newsletters we receive.
 - Apart from this, I go through blog posts & twitter posts on new tech if I come across anything interesting _[external resources]_
 - For me, staying updated is not just knowing things but also executing them. We tend to fall on to the traditional practices, but I try to keep my mind open to newer technologies while also being aware of the impact it may bring. _[open mind]_
@@ -201,6 +202,7 @@
 
 **Tips to answer:**
 - Team's work
+- Your role & responsibilities
 - Learning & growth opportunities
 - Working model of the team
 
@@ -208,6 +210,7 @@
 **Example:**
 - What does the team do? What technologies does it use? _[team's work]_
 - How does the everyday work and challenges look like in the team? 
+- If I join the team, what would my responsibilities in this role look like? _[role & responsibilities]_
 - What kind of learning resources & opportunities does the organization offer? _[learning]_
 - What kind of personal career growth opportunities can I expect? _[career growth]_
 - What is the current working model of the team, is it hybrid? And what about the timings?
