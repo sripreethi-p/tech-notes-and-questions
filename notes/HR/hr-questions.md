@@ -206,9 +206,9 @@
 
 
 **Example:**
-- What does the team do? What technologies does it use? [team's work]
+- What does the team do? What technologies does it use? _[team's work]_
 - How does the everyday work and challenges look like in the team? 
-- What kind of learning resources & opportunities does the organization offer? [learning]
-- What kind of personal career growth opportunities can I expect? [career growth]
+- What kind of learning resources & opportunities does the organization offer? _[learning]_
+- What kind of personal career growth opportunities can I expect? _[career growth]_
 - What is the current working model of the team, is it hybrid? And what about the timings?
 - 
