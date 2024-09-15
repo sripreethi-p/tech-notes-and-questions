@@ -118,6 +118,97 @@ This decorating layer will have **both 'has-a' & 'is-a' relationships** with the
 
 ## Behavioral Design Patterns
 
+### 1. Chain of Responsibility Pattern
+**Purpose:** When you have a set of conditions, and you need to pick the one to be applied based on priority.   
+**How it works:** This pattern allows an object to pass the request along a chain of handlers. Upon receiving a request, each handler decides whether to process the request or to pass it to the next handler in the chain.
+
+#### Key Features
+- **Decoupling:** The sender of a request doesn't know which object will handle it.
+- **Flexibility:** The chain can be dynamically modified to suit the program's needs.
+#### Example
+Say, you have a shopping cart and a set of offers where we want to pick which to be applied based on a set priority. 
+The offers (priority wise):
+- If prime user & cost>200$: 1 week free shipping
+- If prime user: 4 days free shipping
+- If prime user & items are groceries: 5 days free shipping
+- If items are groceries & cost>200$: 2 days free shipping 
+#### Design
+1. We create an Offer Handler interface
+```java
+abstract class OfferHandler {
+    // protected and not private because we want the subclasses to be able to access it
+    protected OfferHandler nextOfferHandler;
+    
+    public void setNextOfferHandler(OfferHandler nextOfferHandler) {
+        this.nextOfferHandler = nextOfferHandler;
+    }
+    
+    public abstract void applyOrder(Order order);
+}
+```
+2. Create Concrete Offer Classes with the logic
+```java
+public class Offer1 extends OfferHandler {
+    @Override
+    public void applyOffer(Order order) {
+        if(order.cost> 200 && order.isPrimeUser) {
+            order.setOfferType("OFFER 1");
+            System.out.println(order.getOfferType() + " applied to " + order.getOrderId());
+        }
+        else if(nextOfferHandler!=null) {
+            nextOfferHandler.applyOffer(order);
+        }
+    }
+}
+```
+
+```java
+public class Offer4 extends OfferHandler {
+    @Override
+    public void applyOffer(Order order) {
+        if(order.getCost()>25 && order.getItemCategories().contains("GROCERIES")) {
+            order.setOfferType("OFFER 4");
+            System.out.println(order.getOfferType() + " applied to " + order.getOrderId());
+        }
+        else if (nextOfferHandler!=null) {
+            nextOfferHandler.applyOffer(order);
+        }
+    }
+}
+```
+
+
+3. Instantiate the offers & setup the chain & run the order through it
+```java
+public class ChainOfResponsibility {
+    public static void main(String[] args) {
+
+        // Initiate offers
+        OfferHandler offer1 = new Offer1();
+        OfferHandler offer2 = new Offer2();
+        OfferHandler offer3 = new Offer3();
+        OfferHandler offer4 = new Offer4();
+
+        // Set up the chain
+        offer1.setNextOfferHandler(offer2);
+        offer2.setNextOfferHandler(offer3);
+        offer3.setNextOfferHandler(offer4);
+
+        Order order1 = new Order("1", 30, List.of("GROCERIES"), true, null);
+        Order order2 = new Order("2", 30, List.of("GROCERIES"), false, null);
+
+        offer1.applyOffer(order1);  // OFFER 2 applied to 1
+        offer1.applyOffer(order2);  // OFFER 4 applied to 2
+    }
+}
+```
+
+### 2. Command Pattern
+
+
+
+
+
 ### 7. Observer Pattern
 
 **Description:** an object (known as the subject) maintains a list of its dependents (known as observers) and notifies them of any state changes, usually by calling one of their methods.
