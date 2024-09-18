@@ -1,10 +1,20 @@
 # Behavioral Design Patterns 
 [definition, purpose, use cases, design, example, implementation] 
-1. [Chain of Responsibility](#1-chain-of-responsibility-pattern)
-2. [Command](#2-command-pattern)
-3. [Interpreter](#3-interpreter-pattern)
-4. [Iterator](#4-iterator-pattern)
-5. []
+
+**Behavioral patterns** are concerned with managing algorithms, relationships, and responsibilities between objects,
+ensuring that objects communicate effectively and efficiently to perform tasks.
+
+1. [Chain of Responsibility](#1-chain-of-responsibility-pattern) - passes a request along a chain of handlers
+2. [Command](#2-command-pattern) - encapsulates a request as an object
+3. [Interpreter](#3-interpreter-pattern) - interprets sentences in a language
+4. [Iterator](#4-iterator-pattern) - provides a way to traverse a collection without exposing its underlying representation
+5. [Mediator](#5-mediator-pattern) - defines communication between objects to reduce direct interactions
+6. [Memento](#6-memento-pattern) - saves and restores an object’s state
+7. [Observer](#7-observer-pattern) - notifies dependent objects of state changes
+8. [State](#8-state-pattern) - changes an object’s behavior when its state changes
+9. [Strategy](#9-strategy-pattern) - allows the selection of an algorithm at runtime
+10. [Template Method](#10-template-method-pattern) - defines the structure of an algorithm but lets subclasses modify certain steps
+11. [Visitor](#11-visitor-pattern) - adds new operations to a class without changing it
 
 ## 1. Chain of Responsibility Pattern
 
@@ -612,6 +622,604 @@ public static void main (String[] args) {
 ## 6. Memento Pattern
 
 ### Definition
+The design pattern is used to capture and restore an object's state without violating encapsulation.
+
+### Purpose
+It is particularly useful when you need to implement undo/redo functionality or save and restore the state of an object.
+
+
+### Use cases
+
+#### 1. Undo/Redo Functionality
+- **Use Case:** In applications where users can make changes to an object (e.g., text editors, graphic design software), the Memento pattern helps implement undo and redo functionality. Each change can be saved as a Memento, allowing users to revert to previous states.
+
+- **Example:** A text editor can use the Memento pattern to save the state of the document at different points in time, allowing users to undo or redo their changes.
+
+#### 2. Version Control Systems
+- **Use Case:** In version control systems, the state of a file or project needs to be captured and restored. The Memento pattern can be used to save snapshots of files or projects, enabling rollback to previous versions.
+
+- **Example:** A source code repository saves snapshots of code changes, allowing developers to revert to earlier versions of the codebase.
+
+
+#### 3. Simulation and Testing
+- **Use Case:** In simulation or testing environments, the Memento pattern can be used to save the state of the system at different points for testing purposes or to analyze different scenarios.
+
+- **Example:** A simulation tool saves the state of a simulated environment at various points, enabling users to analyze how changes in parameters affect the system.
+
+### Design
+- `Originator` class: the object whose state needs to be saved and restored
+- `Memento` class: stores the state of the **_Originator_** and is used to restore the state
+- `Caretaker` class: responsible for keeping the **_Memento_** and ensuring it is not modified. It can request the **_Memento_** from the **_Originator_** and use it to restore the Originator's state.
+
+
+### Example
+Let's consider a simple example of a text editor where we can save and restore the state of the text content.
+
+### Implementation
+
+1. Create `Originator` class whose state needs to be stored
+
+```java
+public class TextEditor {
+    private String content;
+    
+    public void setContent(String content) {
+        this.content = content;
+    }
+    
+    public String getContent() {
+        return content;
+    }
+    
+    public Memento save() {
+        return new Memento(content);
+    }
+    
+    public void restore(Memento memento) {
+        this.content = memento.getContent();
+    }
+}
+```
+2. Create `Memento` class which stores the state of Originator objects
+
+```java
+public class Memento {
+    private final String content;
+    
+    public Memento (String content) {
+        this.content = content;
+    }
+    
+    public String getContent() {
+        return content;
+    }
+}
+```
+
+3. Create `Caretaker` class that handles Memento's requests to restore Originator objects
+
+```java
+import java.util.Stack;
+
+public class Caretaker {
+    private final Stack<Memento> mementoStack = new Stack<>();
+    
+    public void saveState(TextEditor editor) {
+        mementoStack.push(editor.save());
+    }
+    
+    public void restoreState(TextEditor editor) {
+        if(!mementoStack.isEmpty()) {
+            Memento memento = mementoStack.pop();
+            editor.restore(memento);
+        }
+    }
+}
+```
+
+4. `Client` code to demonstrate the usage
+
+```java
+public static void main (String[] args) {
+    TextEditor editor = new TextEditor();
+    Caretaker caretaker = new Caretaker();
+    
+    editor.setContent("Version 1");
+    caretaker.saveState(editor);
+
+    editor.setContent("Version 2");
+    caretaker.saveState(editor);
+
+    editor.setContent("Version 3");
+    
+    System.out.println("Current Content: " + editor.getContent()); // Version 3
+    
+    caretaker.restoreState(editor);
+    System.out.println("Restored to: " + editor.getContent()); // Version 2
+
+    caretaker.restoreState(editor);
+    System.out.println("Restored to: " + editor.getContent()); // Version 1
+}
+```
+
+<br></br>
+
+
+## 7. Observer Pattern
+
+### Definition
+- A design pattern that defines a one-to-many dependency between objects. 
+- When one object (the subject) changes state, all its dependents (observers) are notified and updated automatically.
+
+### Purpose
+This pattern is particularly useful for implementing distributed event handling systems.
+
+### Use cases
+
+#### 1. Notification Systems
+- **Use Case:** Systems that need to send notifications to multiple users or modules whenever an event occurs.
+- **Example:** A stock trading application where various clients (observers) get real-time updates (notifications) on stock price changes from a central server (subject).
+
+#### 2. Logging Frameworks
+- **Use Case:** Logging frameworks often use the Observer pattern to allow multiple loggers to observe the execution of code and generate logs in various formats (e.g., file, console, or remote server).
+- **Example:** In a server-side application, the log manager (subject) notifies different loggers (observers) whenever an event occurs, so they can log it in different destinations.
+
+#### 3. Social Media Feeds
+- **Use Case:** Users (observers) get updates from accounts they follow (subjects) in real-time.
+- **Example:** On platforms like Twitter or Instagram, when someone you follow posts new content, you're notified automatically through feeds or notifications.
+
+
+### Design
+- `Subject` interface: the object that holds the state and notifies observers of any changes
+- `Observer` interface: the object that gets notified of changes in the subject
+- `ConcreteSubject` class: concrete implementation of the subject that maintains the state and notifies observers
+- `ConcreteObserver` class: concrete implementation of the observer that reacts to the changes in the subject
+
+### Example
+Let's create a simple example where a WeatherStation (the subject) notifies multiple displays (observers) about temperature updates.
+
+### Implementation
+
+1. Create `Observer` interface
+```java
+public interface Observer {
+    void update(float temperature);
+}
+```
+
+2. Create `Subject` interface
+```java
+public interface Subject {
+    void registerObserver(Observer observer);
+    void removeObserver(Observer observer);
+    void notifyObservers();
+}
+```
+
+3. Create a `ConcreteSubject` class - WeatherStation
+```java
+public class WeatherStation implements Subject {
+    private List<Observer> observers;
+    private float temperature;
+
+    public WeatherStation() {
+        observers = new ArrayList<>();
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.update(temperature);
+        }
+    }
+
+    public void setTemperature(float temperature) {
+        this.temperature = temperature;
+        notifyObservers();
+    }
+}
+```
+
+4. Create a `ConcreteObserver` class - Weather Display
+
+```java
+public class WeatherDisplay implements Observer {
+    private float temperature;
+    
+    @Override
+    public void update(float temperature) {
+        this.temperature = temperature;
+        display();
+    }
+
+    public void display() {
+        System.out.println("Temperature Display: " + temperature + "°C");
+    }
+}
+```
+
+5. Client code to demonstrate the usage
+
+```java
+public static void main (String[] args) {
+    WeatherStation weatherStation = new WeatherStation();
+
+    WeatherDisplay display1 = new WeatherDisplay();
+    WeatherDisplay display2 = new WeatherDisplay();
+    
+    weatherStation.registerObserver(display1);
+    weatherStation.registerObserver(display2);
+
+    weatherStation.setTemperature(25.0f); // "Temperature Display: 25.0°C" x2
+    weatherStation.setTemperature(30.0f); // "Temperature Display: 30.0°C" x2
+}
+```
+
+<br></br>
+
+
+
+## 8. State Pattern
+
+### Definition
+- A design pattern that allows an object to change its behavior when its internal state changes.
+- The key idea is to represent different states as separate classes and make the object delegate behavior to the current state.
+
+### Purpose
+This pattern is typically used when an object needs to change its behavior based on its current state, 
+without changing the object's class.
+
+
+### Use cases
+
+#### 1. Vending Machine
+- **Use Case:** Vending machines can have different states like `NoCoinState`, `HasCoinState`, and `SoldState`. The behavior of inserting a coin, pressing a button, and dispensing items depends on the machine's current state.
+- **Benefit:** The pattern helps in cleanly handling transitions between states and behavior specific to each state.
+
+#### 2. Traffic Light System
+- **Use Case:** A traffic light has multiple states such as `GreenState`, `YellowState`, and `RedState`, and each state governs the behavior of the traffic light.
+- **Benefit:** The State pattern allows easy switching between these states and encapsulating the behavior of each state in a separate class.
+
+#### 3. Authentication Process
+- **Use Case:** An authentication process can have states such as `NotAuthenticatedState`, `AuthenticatedState`, and `LockedState`. The operations allowed (e.g., login, logout, retry) depend on the current state of the user session.
+- **Benefit:** Using the State pattern makes it easier to handle user sessions, lock the system after a number of failed attempts, and switch between authenticated and non-authenticated states cleanly.
+
+### Design
+- `Context` class: the object whose behavior changes as its internal state changes. It holds a reference to a State object that defines the current state
+- `State` interface: an interface that declares methods corresponding to the behavior that varies by state
+- `ConcreteState` classes: classes that implement the State interface and define specific behavior for different states.
+
+### Example
+Let's design a vending machine that has three states: `NoCoinState`, `HasCoinState`, and `SoldState`. 
+The behavior of dispensing items and accepting coins changes based on the machine's state.
+
+
+### Implementation
+
+1. Create `State` interface for declaring behaviors of different states
+
+```java
+public interface State {
+    void insertCoin();
+    void ejectCoin();
+    void pressButton();
+    void dispense();
+}
+```
+
+2. Create Context class (vending machine) which has different states
+
+```java
+class VendingMachine {
+    private State noCoinState;
+    private State hasCoinState;
+    private State soldState;
+
+    private State currentState;
+
+    public VendingMachine() {
+        noCoinState = new NoCoinState(this);
+        hasCoinState = new HasCoinState(this);
+        soldState = new SoldState(this);
+
+        currentState = noCoinState;  // Initial state
+    }
+
+    public void setState(State state) {
+        this.currentState = state;
+    }
+
+    public State getNoCoinState() {
+        return noCoinState;
+    }
+
+    public State getHasCoinState() {
+        return hasCoinState;
+    }
+
+    public State getSoldState() {
+        return soldState;
+    }
+    
+    // delegate behavior to the current state
+    public void insertCoin() {
+        currentState.insertCoin();
+    }
+
+    public void ejectCoin() {
+        currentState.ejectCoin();
+    }
+
+    public void pressButton() {
+        currentState.pressButton();
+        currentState.dispense();
+    }
+}
+```
+
+3. Create `ConcreteState` classes - `NoCoinState`, `HasCoinState`, and `SoldState`
+
+```java
+public class NoCoinState implements State {
+    private VendingMachine vendingMachine;
+
+    public NoCoinState(VendingMachine vendingMachine) {
+        this.vendingMachine = vendingMachine;
+    }
+
+    public void insertCoin() {
+        System.out.println("Coin inserted.");
+        vendingMachine.setState(vendingMachine.getHasCoinState());
+    }
+
+    public void ejectCoin() {
+        System.out.println("No coin to eject.");
+    }
+
+    public void pressButton() {
+        System.out.println("You need to insert a coin first.");
+    }
+
+    public void dispense() {
+        System.out.println("No item dispensed.");
+    }
+}
+```
+
+```java
+class HasCoinState implements State {
+    VendingMachine vendingMachine;
+    
+    public HasCoinState(VendingMachine vendingMachine) {
+        this.vendingMachine = vendingMachine;
+    }
+    
+    public void insertCoin() {
+        System.out.println("Coin already inserted.");
+    }
+    
+    public void ejectCoin() {
+        System.out.println("Coin ejected.");
+        vendingMachine.setState(vendingMachine.getNoCoinState());
+    }
+    
+    public void pressButton() {
+        System.out.println("Button pressed.");
+        vendingMachine.setState(vendingMachine.getSoldState());
+    }
+    
+    public void dispense() {
+        System.out.println("No item dispensed.");
+    }
+}
+```
+
+
+```java
+class SoldState implements State {
+    VendingMachine vendingMachine;
+    
+    public SoldState(VendingMachine vendingMachine) {
+        this.vendingMachine = vendingMachine;
+    }
+    
+    public void insertCoin() {
+        System.out.println("Please wait, we're already giving you an item.");
+    }
+    
+    public void ejectCoin() {
+        System.out.println("You can't eject the coin, the item is being dispensed.");
+    }
+    
+    public void pressButton() {
+        System.out.println("Already pressed the button.");
+    }
+    
+    public void dispense() {
+        System.out.println("Item dispensed.");
+        vendingMachine.setState(vendingMachine.getNoCoinState());  // Back to no coin state
+    }
+}
+```
+
+4. `Client` code to test the Vending Machine
+
+```java
+public static void main(String[] args) {
+        VendingMachine vendingMachine = new VendingMachine();
+        
+        // Testing the behavior of the vending machine in different states
+        vendingMachine.insertCoin();  // Coin inserted
+        vendingMachine.pressButton();  // Button pressed, item dispensed
+        
+        vendingMachine.ejectCoin();  // No coin to eject, already in NoCoinState
+}
+```
+
+
+<br></br>
+
+
+## 9. Strategy Pattern
+
+### Definition
+- A design pattern that allows you to define a family of algorithms, 
+encapsulate each one, and make them interchangeable at runtime.
+- The pattern lets the algorithm vary independently of clients that use it.
+
+#### Benefits
+* **Flexibility:** You can change algorithms dynamically at runtime.
+* **Maintainability:** Adding new algorithms doesn't require modifying the context class.
+* **Code Reusability:** Different algorithms are encapsulated in their own classes, making them reusable.
+
+
+### Purpose
+When we want to let the client choose the strategy/algorithm at runtime
+
+* Encapsulation of algorithms: Each algorithm is defined in a separate class.
+* Interchangeable strategies: The client can choose any of the available strategies at runtime.
+* Open/Closed principle: You can add new strategies without modifying the existing context class.
+
+
+### Use cases
+
+#### 1. Payment Methods in E-commerce
+- **Use Case:** An e-commerce application supports multiple payment methods such as Credit Card, PayPal, and Apple Pay. Based on the user's selection, a different payment strategy should be used.
+- **Example:** The strategy pattern can encapsulate different payment algorithms, and at checkout, the system can choose which payment method to apply.
+
+#### 2. Data Validation
+- **Use Case:** Applications often need to validate input data, but the validation rules may vary depending on the context (e.g., different countries, types of users, or data formats)
+- **Example:** A form validation system that uses different strategies for validating email, phone numbers, and postal addresses based on regional requirements.
+
+#### 3. Discount Calculation in Retail Applications
+- **Use Case:** An online retail system may need to calculate discounts based on different criteria (e.g., seasonal discount, membership discount, bulk purchase discount).
+- **Example:** The system can apply a different discount strategy for a premium member versus a first-time customer.
+
+
+
+### Design
+- `Strategy` interface: declares a common method that all concrete strategies must implement
+- `ConcreteStrategy` classes: classes that implement the strategy interface and define specific behavior
+- `Context` class: the class that uses the `Strategy` interface. It is configured with a strategy object and calls its methods.
+
+
+### Example
+Imagine a scenario where we want to sort a list of numbers using different algorithms 
+(e.g., Bubble Sort, Quick Sort, Merge Sort), 
+and we want to dynamically choose the sorting strategy at runtime.
+
+### Implementation
+
+1. Create `Strategy` interface
+
+```java
+public interface SortStrategy {
+    void sort(int[] numbers);
+}
+```
+
+2. Create `Concrete Strategies` classes - BubbleSort, SelectionSort
+
+```java
+public class SelectionSort implements SortStrategy {
+    
+    @Override
+    public void sort (int[] numbers) {
+        int n = numbers.length;
+        
+        for (int i = 0; i<n-1; i++) {
+            int minIdx = i;
+            for (int j = i+1; j<n; j++) {
+                if(numbers[j]<numbers[minIdx]) {
+                    minIdx = j;
+                }
+            }
+            
+            int temp = numbers[minIdx];
+            numbers[minIdx] = numbers[i];
+            numbers[i] = temp;
+        }
+
+        System.out.println("Sorted using Selection Sort");
+    }
+}
+```
+
+```java
+public class BubbleSort implements SortStrategy {
+    
+    @Override
+    public void sort (int[] numbers) {
+        int n = numbers.length;
+        
+        for (int i = 0; i<n-1; i++) {
+            for (int j = 0; j<n-i-1; j++) {
+                
+                if(numbers[j]>numbers[j+1]) {
+                    int temp = numbers[j];
+                    numbers[j] = numbers[j+1];
+                    numbers[j+1] = temp;
+                }
+            }
+        }
+
+        System.out.println("Sorted using Bubble Sort");
+    }
+}
+```
+
+3. Create `Context` Class to switch between sorting strategies
+
+```java
+public class SortContext {
+    private SortStrategy sortStrategy;
+
+    // Set strategy at runtime
+    public void setSortStrategy(SortStrategy sortStrategy) {
+        this.sortStrategy = sortStrategy;
+    }
+
+    // Sort the array using the selected strategy
+    public void executeSortStrategy(int[] numbers) {
+        sortStrategy.sort(numbers);
+    }
+}
+```
+
+
+4. `Client` code to change strategies at runtime
+
+```java
+public static void main (String[] args) {
+    int[] numbers = { 5, -2, 7, 8, 1, -6, 4};
+    
+    SortContext context = new SortContext();
+    SelectionSort selectionSort = new SelectionSort();
+    BubbleSort bubbleSort = new BubbleSort();
+    
+    context.setSortStrategy(selectionSort);
+    context.executeSortStrategy(numbers); // "Sorted using Selection Sort"
+    
+    context.setSortStrategy(bubbleSort);
+    context.executeSortStrategy(numbers); // "Sorted using Bubble Sort"
+}
+```
+<br></br>
+
+
+## 10. Template Method Pattern
+
+### Definition
 
 ### Purpose
 
@@ -619,32 +1227,25 @@ public static void main (String[] args) {
 
 ### Design
 
-
 ### Example
-
 
 ### Implementation
 
-
 <br></br>
 
 
-## 7. Observer Pattern
+## 11. Visitor Pattern
 
-**Description:** an object (known as the subject) maintains a list of its dependents (known as observers) and notifies them of any state changes, usually by calling one of their methods.
+### Definition
 
-**Purpose:** This pattern is commonly used in scenarios where you want to establish a one-to-many relationship between objects, ensuring that when one object changes, all its dependents are automatically informed.
+### Purpose
 
-**Example Use case:** A stock ticker system where investors (observers) receive updates on stock prices as soon as there is any change in the stock market. The stock data (subject) is continuously monitored, and all subscribed investors are notified of the updates.
+### Use cases
+
+### Design
+
+### Example
+
+### Implementation
+
 <br></br>
-
-## 9. Strategy Pattern
-
-**Description:** a behavioral design pattern that allows defining a family of algorithms, encapsulating each one, and making them interchangeable. The pattern lets the algorithm vary independently from the clients that use it.
-
-**Purpose:** Widely used when you have multiple algorithms for a specific task, and you want to make your system flexible by switching between these algorithms at runtime.
-
-**Implementation:** In Java, the Strategy pattern is implemented by defining a strategy interface, implementing different strategy algorithms as concrete classes, and allowing clients to choose the appropriate strategy dynamically.
-
-**Example Use case:** An e-commerce platform that allows customers to pay using different methods (e.g., Credit Card, PayPal, Cryptocurrency).
-A `PaymentContext` class can switch between different payment strategies like `CreditCardPayment`, `PayPalPayment`, or `CryptoPayment` based on the user's selection during checkout.
