@@ -9,7 +9,7 @@
 - 
 # Object-Oriented Design 
 - ### [SOLID principles](notes/ood/SOLID.md)
-- ### [Design Patterns](notes/ood/designpatterns.md)
+- ### [Design Patterns](notes/designpatterns/designpatterns.md)
 
 # Designing RESTful APIs
 - ### [Principles of RESTful APIs](notes/restapis/designing-rest-apis.md)
