@@ -1220,16 +1220,110 @@ public static void main (String[] args) {
 ## 10. Template Method Pattern
 
 ### Definition
+- A pattern that defines the skeleton of an algorithm in a base class, but lets subclasses override specific steps of the algorithm without changing its structure. 
+- This promotes code reuse by moving common behavior to the parent class and allows flexibility by letting subclasses define custom behavior for individual steps.
+
+#### Benefits
+* **Code Reusability:** Common steps are written once in the base class, avoiding duplication.
+* **Flexibility:** Subclasses can modify specific steps of the algorithm without changing the overall structure.
+* **Consistency:** Ensures that the algorithm's core structure is consistent across different implementations.
 
 ### Purpose
+Useful in various scenarios where the structure of an algorithm remains the same but individual steps may vary.
 
 ### Use cases
 
+#### 1. Frameworks and Libraries
+- **Use Case:** When developing frameworks or libraries, it's common to provide a standard workflow or process while allowing users to customize specific parts
+- **Example:** A web framework that defines the overall lifecycle of handling HTTP requests (like authentication, authorization, request processing, response generation), but lets developers provide their custom logic for processing specific types of requests.
+
+#### 2. File I/O Operations
+- **Use Case:** Reading from or writing to different types of files (e.g., text, binary, CSV) often follows a similar pattern (open, read/write, close), but with different implementations for file-specific behavior.
+- **Example:** A file handling system where the processFile() method is defined in the base class and specific file types (text files, binary files) override methods to handle the actual read/write operations.
+
+#### 3. Database Operations
+- **Use Case:** When defining database operations, the general flow of connecting to a database, executing a query, and closing the connection is the same, but the specific SQL query or logic may vary
+- **Example:** A database framework may define a template method for executing database operations. Subclasses can implement specific operations such as inserting, updating, or deleting data, but the overall process of opening connections and handling transactions remains consistent
+
 ### Design
+- `Base` class (`abstract` or `concrete`): contains the skeleton of the algorithm in the form of a method, usually marked as `final` to prevent modification. This method calls other methods, some of which may be abstract or have default behavior
+- `Concrete` subclasses: override the abstract or optional methods to provide custom behavior for specific steps in the algorithm
 
 ### Example
+Imagine a game where different players (like a Cricketer or Footballer) need to prepare for a game. 
+The steps might include warming up, playing the game, and cooling down. 
+The sequence is the same, but the specifics vary depending on the sport.
 
 ### Implementation
+1. Create the BaseClass
+
+```java
+public abstract class Player {
+    // Template method
+    public final void prepareForGame() {
+        warmUp();
+        playGame();
+        coolDown();
+    }
+
+    // Common method, can be overridden if needed
+    public void warmUp() {
+        System.out.println("General warm-up exercises");
+    }
+
+    // Abstract methods that subclasses will implement
+    public abstract void playGame();
+
+    // Common method, can be overridden if needed
+    public void coolDown() {
+        System.out.println("Stretching and cooling down");
+    }
+}
+```
+
+2. Create the `Concrete Subclasses` with the custom method implementations
+
+```java
+public class Cricketer extends Player {
+    @Override
+    public void playGame() {
+        System.out.println("Playing cricket: Batting, bowling, fielding");
+    }
+
+    @Override
+    public void coolDown() {
+        System.out.println("Cooling down with light jogging");
+    }
+}
+```
+
+```java
+public class Footballer extends Player {
+    @Override
+    public void playGame() {
+        System.out.println("Playing football: Dribbling, passing, shooting");
+    }
+
+    @Override
+    public void coolDown() {
+        System.out.println("Cooling down with a light walk");
+    }
+}
+```
+
+3. `Client` code
+
+```java
+public static void main(String[] args) {
+        Player cricketer = new Cricketer();
+        cricketer.prepareForGame();
+
+        System.out.println();
+
+        Player footballer = new Footballer();
+        footballer.prepareForGame();
+}
+```
 
 <br></br>
 
@@ -1237,15 +1331,197 @@ public static void main (String[] args) {
 ## 11. Visitor Pattern
 
 ### Definition
+A pattern that allows you to add further operations to objects without modifying them. 
+It enables you to separate algorithms from the objects on which they operate.
+
+#### Benefits
+- **Open/Closed Principle:** You can add new operations (visitors) without modifying the element classes.
+- **Separation of concerns:** Operations are separated from the objects they operate on.
+
+#### Disadvantages
+- If the object structure frequently changes (new element types are added), you will need to modify all visitors to accommodate the new element.
+
 
 ### Purpose
+This pattern is particularly useful when you have a complex object structure 
+and need to perform operations on it that are subject to frequent change.
 
 ### Use cases
 
+#### 1. UI Component Trees
+- **Problem:** A UI framework has different types of components (buttons, text fields, containers), and operations like rendering, accessibility checking, or event handling need to be performed on them.
+- **Use Case:** Using the visitor pattern allows these operations to be added or modified without altering the component classes.
+- **Example:** Components like `Button`, `TextField`, `Container` accept visitors for operations such as rendering or validation of user inputs.
+
+#### 2. Object Serialization and Deserialization
+- **Problem:** You need to serialize or deserialize different object types (e.g., shapes, text, images) to various formats (e.g., JSON, XML)
+- **Use Case:** Implementing different visitors to handle the serialization or deserialization logic for each format without changing the object structure.
+- **Example:** `Shape`, `Image`, `TextBlock` objects can accept visitors that serialize them to formats like JSON or XML.
+
+#### 3. 
 ### Design
 
+- `Visitor`: an interface or abstract class that declares a visit method for each type of element in the object structure. It moves from element to element and performs some operations.
+- `Concrete Visitor`: classes that implement/extend the operations defined in the Visitor interface for each element
+- `Element`: an interface that defines an accept() method. Each concrete element class implements this method, allowing a visitor to perform an operation on it
+- `Concrete Element`: classes that implement the accept() method as per the requirement
+- `Object Structure`: collection of elements that the visitor will traverse
+
+
 ### Example
+Suppose we have a system with different types of files 
+(e.g., TextFile, ImageFile, VideoFile) that we want to perform operations on, 
+such as compression or rendering. 
+
+**We want to avoid changing the file classes each time we add a new operation.**
+
 
 ### Implementation
 
-<br></br>
+1. Create the `Visitor` interface/abstract class
+
+```java
+public interface Visitor {
+    void visit (TextFileElement textFile);
+    void visit (ImageFileElement imageFile);
+    void visit (VideoFileElement videoFile);
+}
+```
+
+2. Create the `Element` interface (File Base) that declares the `accept()` method for element implementations
+
+```java
+public interface FileElement {
+    void accept(Visitor visitor);
+}
+```
+
+3. Create the `Concrete Element` classes (File Types) with accept() implementations
+
+```java
+public class TextFileElement implements FileElement {
+    private String content;
+    
+    public TextFileElement (String content) {
+        this.content = content;
+    }
+    
+    public String getContent() {
+        return content;
+    }
+    
+    @Override
+    public void accept (Visitor visitor) {
+        visitor.accept(this);
+    }
+}
+```
+
+
+```java
+public class ImageFileElement implements FileElement {
+    private String resolution;
+    
+    public ImageFileElement (String resolution) {
+        this.resolution = resolution;
+    }
+    
+    public String getResolution() {
+        return resolution;
+    }
+    
+    @Override
+    public void accept (Visitor visitor) {
+        visitor.accept(this);
+    }
+}
+```
+
+
+```java
+public class VideoFileElement implements FileElement {
+    private String duration;
+    
+    public VideoFileElement (String duration) {
+        this.duration = duration;
+    }
+    
+    public String getDuration() {
+        return duration;
+    }
+    
+    @Override
+    public void accept (Visitor visitor) {
+        visitor.accept(this);
+    }
+}
+```
+
+4. Create `Concrete Visitor` classes to define the operations to perform (rendering & compressing files)
+
+```java
+public class CompressingVisitor implements Visitor {
+    @Override
+    void visit (TextFileElement textFile) {
+        System.out.println("Compressing text file with content: " + textFile.getContent());
+    }
+
+    @Override
+    void visit (ImageFileElement imageFile) {
+        System.out.println("Compressing text file with resolution: " + imageFile.getResolution());
+    }
+
+    @Override
+    void visit (VideoFileElement videoFile) {
+        System.out.println("Compressing text file with duration: " + videoFile.getDuration);
+    }
+}
+```
+
+```java
+public class RenderingVisitor implements Visitor {
+    @Override
+    void visit (TextFileElement textFile) {
+        System.out.println("Rendering text file with content: " + textFile.getContent());
+    }
+
+    @Override
+    void visit (ImageFileElement imageFile) {
+        System.out.println("Rendering text file with resolution: " + imageFile.getResolution());
+    }
+
+    @Override
+    void visit (VideoFileElement videoFile) {
+        System.out.println("Rendering text file with duration: " + videoFile.getDuration);
+    }
+}
+```
+ 
+5. `Client` code to demonstrate the usage
+
+```java
+public static void main (String[] args) {
+    
+    // create the object structure (collection of elements)
+    FileElement[] files = new FileElement[] {
+            new TextFileElement("Hello world"),
+            new ImageFileElement("1920x1080"),
+            new VideoFileElement("2 hours")
+    };
+
+    FileVisitor compressionVisitor = new CompressionVisitor();
+    FileVisitor renderingVisitor = new RenderingVisitor();
+
+    // Apply compression to all files
+    System.out.println("Applying Compression Visitor:");
+    for (FileElement file : files) {
+        file.accept(compressionVisitor);
+    }
+
+    // Apply rendering to all files
+    System.out.println("\nApplying Rendering Visitor:");
+    for (FileElement file : files) {
+        file.accept(renderingVisitor);
+    }
+}
+```
