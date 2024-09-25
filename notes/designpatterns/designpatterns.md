@@ -1,5 +1,9 @@
 # Design Patterns
 
+- Design patterns are general, reusable solutions to common problems that occur in software design. 
+- They provide a standardized approach to solving architectural challenges in object-oriented design and development, allowing developers to create flexible, maintainable, and scalable software. 
+- These patterns are not specific code implementations but rather templates that guide how to structure your code to solve particular problems.
+
 ## [Creational Patterns](creational-patterns.md)
 Creational design patterns are concerned with the process of object creation.
 They provide various ways to create objects while hiding the complexities of the instantiation process.

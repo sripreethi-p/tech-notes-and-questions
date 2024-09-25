@@ -9,13 +9,13 @@ to form larger structures while keeping these structures flexible and efficient.
 - They help ensure that if one part of a system changes, the entire structure does not need to change as a result.
 
 
-1. [Adapter](#1-adapter-pattern)
-2. [Bridge](#2-bridge-pattern)
-3. [Composite](#3-composite-pattern)
-4. [Decorator](#4-decorator-pattern)
-5. [Facade](#5-facade-pattern)
-6. [Flyweight](#6-flyweight-pattern)
-7. [Proxy](#7-proxy-pattern)
+1. [Adapter](#1-adapter-pattern) - converts one interface to another, allowing incompatible interfaces to work together
+2. [Bridge](#2-bridge-pattern) - decouples an abstraction from its implementation, enabling them to vary independently
+3. [Composite](#3-composite-pattern) - composes objects into tree structures to represent part-whole hierarchies
+4. [Decorator](#4-decorator-pattern) - adds responsibilities to an object dynamically without altering its structure
+5. [Facade](#5-facade-pattern) - provides a simplified interface to a complex system of classes
+6. [Flyweight](#6-flyweight-pattern) - reduces memory usage by sharing common parts of objects, making large numbers of fine-grained objects more efficient
+7. [Proxy](#7-proxy-pattern) - controls access to another object, providing additional functionality like lazy initialization or security
 
 
 

@@ -188,18 +188,83 @@ Bike but with subcategories of Luxury vehicles & Economic vehicles
 
 ### Definition
 
+* A design pattern that allows you to create new objects by copying an existing object, known as the prototype. 
+* The key benefit is that it allows for dynamic object creation and can simplify object creation processes.
+
 ### Purpose
+
+This pattern is useful 
+when the cost of creating a new instance of an object is more expensive than copying an existing one.
 
 ### Use cases
 
 ### Design
 
+- `Prototype` Interface: This defines a method for cloning itself.
+- `Concrete Prototype`: This is the class that implements the Prototype interface and provides the cloning functionality.
+
 ### Example
+
+Let's illustrate this with a simple example involving shapes.
 
 ### Implementation
 
-**Purpose:** Specifies the kinds of objects to create using a prototypical instance and creates new objects by copying this prototype.
+1. Create the `Prototype Interface`
 
-**Use Case:** When the cost of creating a new object is more expensive than copying an existing object, or when objects can be cloned rather than created from scratch.
+```java
+public interface Shape {
+    Shape clone();
+    void draw();
+}
+```
 
-**Implementation:** Involves a prototype interface with a method for cloning itself and concrete classes that implement this method.  
+2. Create `Concrete Prototype` Classes
+
+```java
+public class Circle implements Shape {
+    @Override
+    public Shape clone() {
+        return new Circle();
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("Drawing a Circle");
+    }
+}
+```
+
+```java
+public class Square implements Shape {
+    @Override
+    public Shape clone() {
+        return new Square();
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("Drawing a Square");
+    }
+}
+```
+
+3. Client code to demonstrate the usage
+
+```java
+public static void main(String[] args) {
+        // Create a circle and square
+        Shape circle = new Circle();
+        Shape square = new Square();
+        
+        // Clone the shapes
+        Shape clonedCircle = circle.clone();
+        Shape clonedSquare = square.clone();
+        
+        // Draw original and cloned shapes
+        circle.draw(); // Output: Drawing a Circle
+        clonedCircle.draw(); // Output: Drawing a Circle
+        
+        square.draw(); // Output: Drawing a Square
+        clonedSquare.draw(); // Output: Drawing a Square
+}
+```

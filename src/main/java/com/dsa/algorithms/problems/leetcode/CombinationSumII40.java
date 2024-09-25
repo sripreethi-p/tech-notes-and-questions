@@ -29,7 +29,7 @@ public class CombinationSumII40 {
             ]
      */
 
-    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+    public static List<List<Integer>> combinationSum2(int[] candidates, int target) {
         List<List<Integer>> result = new ArrayList<>();
         List<Integer> combo = new ArrayList<>();
         Arrays.sort(candidates);
@@ -40,7 +40,7 @@ public class CombinationSumII40 {
 
 
 
-    private void findCombinations(int[] candidates, List<List<Integer>> result, List<Integer> combination, int index, int totalLeft) {
+    private static void findCombinations(int[] candidates, List<List<Integer>> result, List<Integer> combination, int index, int totalLeft) {
         if(totalLeft==0) {
             result.add(new ArrayList<>(combination));
             return;
@@ -54,6 +54,16 @@ public class CombinationSumII40 {
             combination.add(candidates[i]);
             findCombinations(candidates, result, combination, i+1, totalLeft-candidates[i]);
             combination.remove(combination.size()-1);
+        }
+    }
+
+    public static void main (String[] args) {
+        int[] arr = { 1, 1, 1, 1, 2, 2};
+        int target = 4;
+        List<List<Integer>> solution = combinationSum2(arr, target);
+
+        for ( int i = 0; i<solution.size(); i++) {
+            System.out.println(" " + solution.get(i) + " ");
         }
     }
 }

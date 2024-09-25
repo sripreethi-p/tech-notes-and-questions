@@ -14,22 +14,23 @@ public class CombinationSum39 {
 
         List<List<Integer>> result = new ArrayList<>();
         List<Integer> combo = new ArrayList<>();
-        findCombinations(candidates, target, result, combo, 0, 0);
+        findCombinations(candidates, result, combo, 0, target);
         return result;
     }
 
-    private void findCombinations(int[] candidates, int target, List<List<Integer>> result, List<Integer> combination, int index, int sum) {
-       if(sum==target) {
-           result.add(new ArrayList<>(combination));
-           return;
-       }
-       if(sum>target || index>=candidates.length) {
-           return;
-       }
 
-       combination.add(candidates[index]);
-       findCombinations(candidates, target, result, combination, index, sum+candidates[index]);
-       combination.remove(combination.size()-1);
-       findCombinations(candidates, target, result, combination, index+1, sum);
+    private void findCombinations(int[] candidates, List<List<Integer>> result, List<Integer> combination, int index, int totalLeft) {
+        if(totalLeft==0) {
+            result.add(new ArrayList<>(combination));
+            return;
+        }
+        if(totalLeft<0 || index>=candidates.length) {
+            return;
+        }
+
+        combination.add(candidates[index]);
+        findCombinations(candidates, result, combination, index, totalLeft-candidates[index]);
+        combination.remove(combination.size()-1);
+        findCombinations(candidates, result, combination, index+1, totalLeft);
     }
 }
