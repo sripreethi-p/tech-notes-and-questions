@@ -221,7 +221,8 @@ for creating families of related or dependent objects without specifying their c
 
 - In factory method, we have an abstraction at product level.   
 Here, we have another layer of abstraction at the factory class to group the concrete products.
-- 
+
+
 ### Purpose
 It's useful when you need to create objects from several related classes without knowing their exact types.
 
@@ -359,27 +360,121 @@ public static void main (String[] args) {
 ## 4. Builder Pattern
 
 ### Definition
+The pattern separates the construction of an object from its representation, 
+allowing for more control over the object creation process.
 
 ### Purpose
+When an object needs to be created with many possible configurations 
+or when the construction process involves multiple steps.
 
 ### Use cases
 
 ### Design
 
+* `Builder`: A separate object that builds the desired object step by step.
+* `Product`: The object that the builder constructs.
+* `Director`: (Optional) An object that controls the construction process, ensuring that all necessary steps are performed.
+
 ### Example
+
+Imagine you want to build a house object, and it has multiple optional and mandatory fields. 
+Instead of having a constructor with many parameters, 
+you can use the builder pattern to construct the house step by step.
 
 ### Implementation
 
+1. Create the `House` class with its fields & also a static class `HouseBuilder` inside it that builds the object of House type.
 
+```java
+// Product class
+public class House {
+    // Required parameters
+    private final String foundation;
+    private final String structure;
+
+    // Optional parameters
+    private final boolean hasGarage;
+    private final boolean hasSwimmingPool;
+    private final boolean hasGarden;
+
+    // Private constructor
+    private House(HouseBuilder builder) {
+        this.foundation = builder.foundation;
+        this.structure = builder.structure;
+        this.hasGarage = builder.hasGarage;
+        this.hasSwimmingPool = builder.hasSwimmingPool;
+        this.hasGarden = builder.hasGarden;
+    }
+
+    @Override
+    public String toString() {
+        return "House{" +
+                "foundation='" + foundation + '\'' +
+                ", structure='" + structure + '\'' +
+                ", hasGarage=" + hasGarage +
+                ", hasSwimmingPool=" + hasSwimmingPool +
+                ", hasGarden=" + hasGarden +
+                '}';
+    }
+
+    // Builder Class
+    public static class HouseBuilder {
+        // Required parameters
+        private final String foundation;
+        private final String structure;
+
+        // Optional parameters - initialize with default values
+        private boolean hasGarage = false;
+        private boolean hasSwimmingPool = false;
+        private boolean hasGarden = false;
+
+        // Builder constructor with required parameters
+        public HouseBuilder(String foundation, String structure) {
+            this.foundation = foundation;
+            this.structure = structure;
+        }
+
+        // Setters for optional parameters
+        public HouseBuilder setGarage(boolean hasGarage) {
+            this.hasGarage = hasGarage;
+            return this; // Return builder to allow chaining
+        }
+
+        public HouseBuilder setSwimmingPool(boolean hasSwimmingPool) {
+            this.hasSwimmingPool = hasSwimmingPool;
+            return this;
+        }
+
+        public HouseBuilder setGarden(boolean hasGarden) {
+            this.hasGarden = hasGarden;
+            return this;
+        }
+
+        // Build method to create the House object
+        public House build() {
+            return new House(this);
+        }
+    }
+}
+```
+
+2. `Client` code to demonstrate the usage
+
+```java
+public class BuilderPatternExample {
+    public static void main(String[] args) {
+        // Using the builder to create a complex House object
+        House house = new House.HouseBuilder("Concrete", "Wood")
+                .setGarage(true)
+                .setSwimmingPool(false)
+                .setGarden(true)
+                .build();
+
+        System.out.println(house);
+    }
+}
+```
 <br></br>
-
-**Purpose:** Separates the construction of a complex object from its representation so that the same construction process can create different representations.
-
-**Use Case:** When an object needs to be created with many possible configurations or when the construction process involves multiple steps.
-
-**Implementation:** Involves a builder class that assembles the parts of an object and a director class that directs the building process.
-
-![Builder Design Pattern](../images/builder-design-pattern.png)
 
 **Explanation:**
 - House: The House class is the complex object that we want to build. It has private fields and a private constructor that only the HouseBuilder can use.
