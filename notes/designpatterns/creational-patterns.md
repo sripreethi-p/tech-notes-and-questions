@@ -215,20 +215,23 @@ public static void main (String[] args) {
 ## 3. Abstract Factory Pattern
 
 ### Definition
-A design pattern
+- A design pattern
 that provides an interface
 for creating families of related or dependent objects without specifying their concrete classes.
 
+- In factory method, we have an abstraction at product level.   
+Here, we have another layer of abstraction at the factory class to group the concrete products.
+- 
 ### Purpose
 It's useful when you need to create objects from several related classes without knowing their exact types.
 
 ### Use cases
 
 ### Design
-- `Abstract Factory` interface: Declares the creation methods for each product type.
-- `Concrete Factory`: Implements the creation methods for the specific product family.
 - `Abstract Product` interface: Declares the interface for a type of product.
 - `Concrete Product`: Implements the abstract product interface.
+- `Abstract Factory` interface: Declares the creation methods for each product type.
+- `Concrete Factory`: Implements the creation methods for the specific product family.
 - `Client`: Uses the factories to get instances of products but is unaware of the specific classes being created.
 
 ### Example
@@ -236,7 +239,119 @@ Let's take the same example as above - vehicles like Car,
 Bike but with subcategories of Luxury vehicles & Economic vehicles
 
 ### Implementation
-![Abstract Factory Design Pattern](../images/abstract-factory-design-pattern.png)
+
+1. Create the `Vehicle` interface
+
+```java
+interface Vehicle {
+    void move();
+}
+```
+
+2. Create the `ConcreteProduct` classes
+
+```java
+public class EconomicCar implements Vehicle {
+
+    @Override
+    void move() {
+        System.out.println("Driving an Economic Car...");
+    }
+}
+```
+
+```java
+public class LuxuryCar implements Vehicle {
+
+    @Override
+    void move() {
+        System.out.println("Driving a Luxury Car...");
+    }
+}
+```
+
+```java
+public class EconomicBike implements Vehicle {
+
+    @Override
+    void move() {
+        System.out.println("Riding an Economic Bike...");
+    }
+}
+```
+
+```java
+public class LuxuryBike implements Vehicle {
+
+    @Override
+    void move() {
+        System.out.println("Riding a Luxury Bike...");
+    }
+}
+```
+
+3. Create the abstract `VehicleFactory` interface
+
+```java
+public interface VehicleFactory {
+    Vehicle getVehicle(String vehicleName);
+} 
+```
+
+4. Create the `ConcreteVehicleFactory` classes that group the products
+
+```java
+public class EconomicVehicleFactory implements VehicleFactory {
+    
+    @Override
+    Vehicle getVehicle(String vehicleName) {
+        if (vehicleName.equalsIgnoreCase("car")) {
+            return new EconomicCar();
+        }
+        else if(vehicleName.equalsIgnoreCase("bike")) {
+            return new EconomicBike();
+        }
+        
+        return null;
+    }
+}
+```
+
+```java
+public class LuxuryVehicleFactory implements VehicleFactory {
+    
+    @Override
+    Vehicle getVehicle(String vehicleName) {
+        if (vehicleName.equalsIgnoreCase("car")) {
+            return new LuxuryCar();
+        }
+        else if(vehicleName.equalsIgnoreCase("bike")) {
+            return new LuxuryBike();
+        }
+        
+        return null;
+    }
+}
+```
+
+5. `Client` code to demonstrate the usage
+
+```java
+public static void main (String[] args) {
+    VehicleFactory economicFactory = new EconomicVehicleFactory();
+    VehicleFactory luxuryFactory = new LuxuryVehicleFactory();
+    
+    Vehicle vehicle1 = economicFactory.getVehicle("car");   
+    Vehicle vehicle2 = luxuryFactory.getVehicle("car");     
+    Vehicle vehicle3 = economicFactory.getVehicle("bike");  
+    Vehicle vehicle4 = luxuryFactory.getVehicle("bike");    
+    
+    vehicle1.move();  // Driving an Economy Car...
+    vehicle2.move();  // Driving a Luxury Car...
+    vehicle3.move();  // Riding an Economic Bike...
+    vehicle4.move();  // Riding a Luxury Bike...
+}
+```
 
 <br></br>
 
