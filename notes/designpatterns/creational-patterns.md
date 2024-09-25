@@ -369,6 +369,25 @@ or when the construction process involves multiple steps.
 
 ### Use cases
 
+#### 1.  Object Creation with Many Optional Parameters
+**Scenario:** An object has several optional parameters that may or may not be used. 
+Passing null or using multiple overloaded constructors can lead to unreadable code.
+
+#### 2.  Immutable Objects with Configurable Parameters
+**Scenario:** When you want to build an object with many configurable properties while ensuring immutability. The builder pattern helps ensure that once an object is constructed, it cannot be modified.
+
+**Use Case:** Creating immutable classes like `Person`, `Book`, or `Bank Account`, where you want to avoid setters and ensure the object is completely initialized once constructed.
+
+**Example:** An immutable `Person` object with mandatory parameters (name, age) and optional parameters (address, phone number, etc.).
+
+#### 3. Building Different Representations of the Same Object
+**Scenario:** You may need to build different representations of the same object depending on the context (e.g., different variations or versions of the same object).
+
+**Use Case:** When you need multiple representations of an object, such as building Report Generators, Document Parsers, or HTML/JSON/XML builders.
+
+Example: A Document object that can be represented as HTML, PDF, or plain text, with common elements like title, body, and footer.
+
+
 ### Design
 
 * `Builder`: A separate object that builds the desired object step by step.
@@ -498,6 +517,11 @@ when the cost of creating a new instance of an object is more expensive than cop
 
 ### Use cases
 
+#### 1. When object creation is costly or complex
+**Example:** In scenarios where creating a new object is resource-intensive (due to expensive database calls, network requests, or complex initial setup), 
+the Prototype pattern allows you to clone an existing object. This avoids unnecessary repetition of the heavy creation process.  
+
+**Use Case:** Creating a large number of similar objects in a graphic editor, where each object has similar properties, can be optimized by cloning.
 ### Design
 
 - `Prototype` Interface: This defines a method for cloning itself.
@@ -566,5 +590,7 @@ public static void main(String[] args) {
         
         square.draw(); // Output: Drawing a Square
         clonedSquare.draw(); // Output: Drawing a Square
+    
+        System.out.println(circle==clonedCircle); // false, different objects
 }
 ```
