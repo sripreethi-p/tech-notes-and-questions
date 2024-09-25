@@ -1,6 +1,6 @@
 package com.dsa.algorithms.domain.java;
 
-import com.dsa.algorithms.domain.java.designpatterns.singleton.SingletonClass;
+import com.dsa.algorithms.designpatterns.singleton.SingletonClass;
 
 public class SingletonClassImplementation {
     public static void main(String[] args) {

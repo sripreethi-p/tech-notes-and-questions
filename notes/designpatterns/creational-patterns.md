@@ -48,7 +48,47 @@ This is useful when you want to control access to a shared resource, like a conf
 Let's implement a simple Java class that behaves like a Singleton class
 
 ### Implementation
-![Singleton Design Pattern](../images/singleton-pattern.png)
+
+1. Create the `SingletonClass` for which you want only one instance created (lazy initialization)
+
+```java
+public class SingletonClass {
+    
+    public static SingletonClass instance;
+    // (eager initialization)
+    // public static SingletonClass instance = new SingletonClass();
+    
+    
+    // blocking the constructor so it's not accessible for multiple instantiations
+    private SingletonClass() {
+    }
+    
+    /*
+        'synchronized' so that even when multiple threads try to access, 
+         only one thread can instantiate it & the others will use that instance
+     */
+    public static synchronized SingletonClass getInstance() {
+        
+        // (lazy initialization)
+        // 'instance==null' check to ensure all the threads use the one instance that's already created
+        if (instance==null) {
+            instance = new SingletonClass();
+        }
+        return instance;
+    }
+}
+```
+
+2. Client code demonstrate Singleton usage
+
+```java
+public static void main (String[] args) {
+    SingletonClass instance1 = SingletonClass.getInstance();
+    SingletonClass instance2 = SingletonClass.getInstance();
+
+    System.out.println(instance1 == instance2); // true, same instance
+}
+```
 
 <br></br>
 
@@ -109,16 +149,66 @@ Let's say we have different vehicles like Bike, Car, etc.
 We want the client to initiate instances as per required without having to know about the associated concrete classes.
 
 ### Implementation
-![Factory Design Pattern](../images/factory-design-pattern.png)
 
-<br></br>
-**Purpose:** When you want to create objects of different classes without specifying the exact class based on some conditions
+1. Create the `Vehicle` interface
 
-**Use Case:** When a class can’t anticipate the type of objects it needs to create or when subclasses are expected to specify the objects to be created.
+```java
+interface Vehicle {
+    void drive();
+}
+```
 
-**Implementation:** Involves a base class with a factory method that is overridden by subclasses to create specific objects.
+2. Create the Concrete classes `Car`, `Bike`, etc.
 
+```java
+public class Car implements Vehicle {
+    
+    @Override
+    void drive() {
+        System.out.println("Driving a Car...");
+    }
+}
+```
 
+```java
+public class Bike implements Vehicle {
+    
+    @Override
+    void drive() {
+        System.out.println("Driving a Bike...");
+    }
+}
+```
+
+3. Create the `Factory class` with methods to decide the type of class for the object (object creation logic)
+
+```java
+public class VehicleFactory {
+    public Vehicle getVehicle(String vehicleName) {
+        if(vehicleName.equalsIgnoreCase("car")) {
+            return new Car();
+        }
+        else if(vehicleName.equalsIgnoreCase("bike")) {
+            return new Bike();
+        }
+        
+        return null;
+    }
+}
+```
+
+4. `Client` code to demonstrate the usage
+```java
+public static void main (String[] args) {
+    VehicleFactory vehicleFactory = new VehicleFactory();
+    
+    Vehicle vehicle1 = vehicleFactory.getVehicle("car");
+    Vehicle vehicle2 = vehicleFactory.getVehicle("bike");
+    
+    vehicle1.drive(); // Driving a Car...
+    vehicle2.drive(); // Driving a Bike...
+}
+```
 
 <br></br>
 

@@ -1,4 +1,4 @@
-package com.dsa.algorithms.domain.java.designpatterns.singleton;
+package com.dsa.algorithms.designpatterns.singleton;
 
 public class SingletonClass {
 
