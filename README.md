@@ -6,8 +6,10 @@
 # Concurrency & Multithreading
 - ### [Terms & Usages](notes/multithreading/terms-and-usages.md)
 - ### [Designing thread safe classes](notes/multithreading/designing-thread-safe-classes.md)
-- 
+- ### [Concurrency vs Parallelism](notes/multithreading/concurrency-vs-parallelism.md)
+
 # Object-Oriented Design 
+- ### [Design Principles]()
 - ### [SOLID principles](notes/ood/SOLID.md)
 - ### [Design Patterns](notes/designpatterns/designpatterns.md)
 
