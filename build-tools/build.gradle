@@ -1,0 +1,278 @@
+import com.github.spotbugs.snom.Confidence
+
+/* To allow build scripts to use external libraries, add them to script's classpath */
+buildscript {
+    ext {
+        // https://git.target.com/tap/platform-connector-java/releases
+        platformConnectorGradleVersion = "4.0.6"
+        // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-gradle-plugin
+        springBootVersion = "3.3.5"
+        // https://mvnrepository.com/artifact/io.spring.gradle/dependency-management-plugin
+        springDependencyManagementVersion = "1.1.6"
+        // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies
+        springCloudVersion = "2023.0.3"
+
+        // https://mvnrepository.com/artifact/io.micrometer/micrometer-tracing-bridge-otel
+        micrometerTracingVersion = "1.3.5"
+        // https://git.target.com/TargetOSS/token-manager/releases
+        tokenManagerVersion = "7.0.1"
+        // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
+        springDocVersion = "2.6.0"
+
+        // https://github.com/diffplug/spotless/blob/main/plugin-gradle/CHANGES.md
+        spotlessPluginVersion = "6.25.0"
+        // https://plugins.gradle.org/plugin/com.github.spotbugs
+        spotbugsGradlePluginVersion = "6.0.25"
+        // https://github.com/spotbugs/spotbugs/releases
+        spotbugsAnnotationsVersion = "4.8.6"
+        // https://plugins.gradle.org/plugin/dev.projektor.publish
+        projektorVersion = "9.0.0"
+        // https://github.com/jacoco/jacoco/releases
+        jacocoVersion = "0.8.12"
+        // https://plugins.gradle.org/plugin/org.sonarqube
+        sonarqubeVersion = "5.1.0.4882"
+        // https://github.com/pmd/pmd/releases
+        pmdVersion = "7.7.0"
+
+        // https://mvnrepository.com/artifact/org.testcontainers/testcontainers-bom
+        testcontainersVersion = "1.20.3"
+        // https://mvnrepository.com/artifact/org.awaitility/awaitility
+        awaitilityVersion = "4.2.2"
+        // https://github.com/greenmail-mail-test/greenmail/releases
+        greenmailVersion = "2.1.0"
+    }
+    dependencies {
+        classpath("com.target.platform:platform-connector-gradle:${platformConnectorGradleVersion}") {
+            exclude group: "org.springframework.boot"
+        }
+    }
+}
+
+/* New syntax for applying plugins */
+plugins {
+    id "java"
+    id "org.springframework.boot" version "${springBootVersion}"
+    id "io.spring.dependency-management" version "${springDependencyManagementVersion}"
+
+    id "com.diffplug.spotless" version "${spotlessPluginVersion}"
+    id "com.github.spotbugs" version "${spotbugsGradlePluginVersion}"
+    id "dev.projektor.publish" version "${projektorVersion}"
+    id "jacoco"
+    id "org.sonarqube" version "${sonarqubeVersion}"
+    id "pmd"
+
+    id "idea"
+}
+
+apply plugin: "com.target.platform.connector.spring-boot-webmvc"
+
+defaultTasks "clean", "build"
+
+group "com.tgt.srt"
+version = "1.0.0"
+mainClassName = "com.tgt.ci.coverage.CoverageApp"
+jar.enabled = true
+sourceCompatibility = "17"
+
+configurations.configureEach {
+    exclude module: "logback-classic"
+    exclude module: "spring-boot-starter-logging"
+}
+
+repositories {
+    maven { url "https://binrepo.target.com/artifactory/maven-central" }
+}
+
+dependencies {
+
+    annotationProcessor "org.projectlombok:lombok"
+
+    compileOnly "org.projectlombok:lombok"
+    compileOnly "org.springframework.boot:spring-boot-configuration-processor"
+    compileOnly "com.github.spotbugs:spotbugs-annotations:${spotbugsAnnotationsVersion}"
+
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-aop"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-cache"
+    implementation "org.springframework.boot:spring-boot-starter-mail"
+    implementation "org.springframework.kafka:spring-kafka"
+
+    implementation "io.micrometer:micrometer-tracing-bridge-otel:${micrometerTracingVersion}"
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocVersion}"
+
+    implementation "co.elastic.clients:elasticsearch-java:8.15.3"
+    implementation "com.github.ben-manes.caffeine:caffeine"
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv'
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.springframework.cloud:spring-cloud-starter-contract-stub-runner"
+
+    implementation platform("org.testcontainers:testcontainers-bom:${testcontainersVersion}")
+    testImplementation "org.testcontainers:junit-jupiter"
+    testImplementation "org.testcontainers:elasticsearch"
+    testImplementation "org.testcontainers:kafka"
+    testImplementation "org.awaitility:awaitility:${awaitilityVersion}"
+    testImplementation "com.icegreen:greenmail-junit5:${greenmailVersion}"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+/*
+ * -------------------------------------------
+ * Test Configuration
+ * -------------------------------------------
+ */
+test {
+    useJUnitPlatform()
+}
+// run pmd and spotbugs before test
+test.dependsOn "pmdMain"
+test.dependsOn "spotbugsMain"
+test.dependsOn "spotbugsTest"
+
+/*
+ * -------------------------------------------
+ * Spotless Configuration
+ * -------------------------------------------
+ */
+spotless {
+    java {
+        removeUnusedImports()
+        palantirJavaFormat()
+    }
+    json {
+        target "**/*.json"
+        targetExclude "**/projektor_report.json", "out/**", "build/**", ".idea/**", ".gradle/**"
+        gson().indentWithSpaces(2)
+    }
+    yaml {
+        target "**/*.yaml", "**/*.yml"
+        targetExclude "**/secret.yml", "out/**", "build/**", ".idea/**", ".gradle/**"
+        jackson()
+                .yamlFeature("MINIMIZE_QUOTES", true)
+                .yamlFeature("INDENT_ARRAYS", true)
+                .yamlFeature("INDENT_ARRAYS_WITH_INDICATOR", true)
+                .yamlFeature("WRITE_DOC_START_MARKER", false)
+    }
+    groovyGradle {
+        target "**/*.gradle"
+        greclipse()
+        indentWithSpaces(4)
+    }
+    flexmark {
+        target "**/*.md"
+        flexmark()
+    }
+}
+
+/*
+ * -------------------------------------------
+ * Spotbugs Configuration
+ * -------------------------------------------
+ */
+spotbugs {
+    reportLevel = Confidence.valueOf('HIGH')
+    excludeFilter.set(file("$rootProject.projectDir/tools/spotbugs/spotbugs-exclude.xml"))
+}
+tasks.spotbugsMain {
+    reports.create("html") {
+        required = true
+        outputLocation = file("$buildDir/reports/spotbugs/main/spotbugs.html")
+        setStylesheet("fancy-hist.xsl")
+    }
+}
+tasks.spotbugsTest {
+    enabled = false
+}
+
+
+/*
+ * -------------------------------------------
+ * Projektor Configuration
+ * -------------------------------------------
+ */
+projektor {
+    serverUrl = "https://projektor.dev.target.com"
+}
+
+/*
+ * -------------------------------------------
+ * Intellij Configuration
+ * -------------------------------------------
+ */
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+/*
+ * -------------------------------------------
+ * Jacoco Configuration
+ * -------------------------------------------
+ */
+jacoco {
+    toolVersion = jacocoVersion
+}
+jacocoTestReport {
+    reports {
+        xml.required = true
+        csv.required = false
+        html.destination file("$buildDir/reports/jacoco/")
+    }
+}
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.0
+            }
+        }
+    }
+}
+// to run coverage verification during the build (and fail when appropriate)
+check.dependsOn jacocoTestCoverageVerification
+check.dependsOn jacocoTestReport
+
+
+/*
+ * -------------------------------------------
+ * Sonarqube Configuration
+ * -------------------------------------------
+ */
+sonarqube {
+    properties {
+        property 'sonar.projectKey', "shopright.${rootProject.name}"
+        property 'sonar.projectName', "shopright_${rootProject.name}"
+        property 'sonar.projectVersion', '1.0.0'
+        property 'sonar.host.url', 'https://cisonar.prod.target.com/'
+        property 'sonar.login', 'd79d30056d198d6c172dd1eff6f6d2c1e7d29119'
+        property 'sonar.gradle.skipCompile', true
+    }
+}
+
+/*
+ * -------------------------------------------
+ * PMD Configuration
+ * -------------------------------------------
+ */
+tasks.withType(Pmd).configureEach {
+    reports {
+        xml.required = false
+        html.required = true
+    }
+}
+pmd {
+    toolVersion = pmdVersion
+    ignoreFailures = false
+    sourceSets = [sourceSets.main]
+    ruleSetFiles = files(new File(rootDir, "tools/pmd/pmd.xml"))
+    ruleSets = []
+    rulesMinimumPriority = 2 // TODO right not only showing highest errors because old code. Should be 5
+}

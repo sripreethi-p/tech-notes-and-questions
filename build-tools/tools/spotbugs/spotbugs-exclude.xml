@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <Match>
+        <!-- Suppress WMI_WRONG_MAP_ITERATOR in all java files. -->
+        <And>
+            <Source name="~.*.java"/>
+            <Bug code="WMI"/>
+        </And>
+    </Match>
+</FindBugsFilter>

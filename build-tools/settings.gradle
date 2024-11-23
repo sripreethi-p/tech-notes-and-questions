@@ -1,0 +1,9 @@
+pluginManagement {
+    repositories {
+        maven { url 'https://binrepo.target.com/artifactory/plugins-gradle' }
+        maven { url "https://binrepo.target.com/artifactory/platform" }
+    }
+}
+
+rootProject.name = 'ci-coverage-service'
+

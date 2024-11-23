@@ -1,0 +1,11 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "baseBranches": [
+    "stage"
+  ],
+  "extends": [
+    "local>toolshed/renovate-config:jvm",
+    "local>toolshed/renovate-config:docker",
+    "local>toolshed/renovate-config:vela"
+  ]
+}
