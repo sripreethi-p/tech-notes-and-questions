@@ -52,3 +52,9 @@
 
 
 
+# Useful Code Snippets
+
+- External Client Repositories: [RestClient](src/main/java/com/dsa/algorithms/client/RestClientRepository.java), [ElasticsearchRestClient](src/main/java/com/dsa/algorithms/client/ElasticsearchClientRepository.java), [KafkaTemplate](src/main/java/com/dsa/algorithms/client/KafkaTemplateRepository.java)
+- Useful Helper Libraries: [Mapstruct](src/main/java/com/dsa/algorithms/utils/PojoMapper.java)
+
+
