@@ -1,0 +1,29 @@
+animals-service:
+  data:
+    api-key: key
+    api-url: "http://localhost:${wiremock.server.port}/animals"
+
+  es:
+    index: es-index
+
+  mailRecipients: sripreethi07@gmail.com.com
+management:
+  endpoints:
+    enabled-by-default: true
+server:
+  servlet:
+    contextPath: /animals-service
+spring:
+  profiles:
+    active: test
+  elasticsearch:
+    uris: elasticsearch:9200
+  mail:
+    host: 127.0.0.1
+    port: 3025
+    protocol: smtp
+  kafka:
+    bootstrap-servers: kafka:9092
+    template:
+      observation-enabled: true
+      default-topic: kafka-local-topic

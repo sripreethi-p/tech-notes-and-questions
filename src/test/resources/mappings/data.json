@@ -1,0 +1,16 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPathPattern": "/animals"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "animals/{{request.path.4}}_{{request.query.name}}_{{request.query.age}}.json",
+    "transformers": [
+      "response-template"
+    ]
+  }
+}

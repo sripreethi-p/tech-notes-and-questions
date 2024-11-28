@@ -52,6 +52,7 @@ dependencies {
 	testImplementation "org.testcontainers:junit-jupiter"
 	testImplementation "org.testcontainers:elasticsearch"
 	testImplementation "org.testcontainers:kafka"
+	testImplementation "org.testcontainers:mongodb"
 	testImplementation "org.awaitility:awaitility:4.2.2"
 	testImplementation "com.icegreen:greenmail-junit5:2.1.0"
 	testImplementation "org.springframework.boot:spring-boot-starter-test"
